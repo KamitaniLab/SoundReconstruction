@@ -1,0 +1,50 @@
+# Reconstruction configuration file
+
+# Library settings ##################################################
+# [REQUIRED] Path to the SpecVQGAN direcotry.
+specvqgan dir:
+  ../../SpecVQGAN
+
+# Feature decoding settings ##################################################
+# [REQUIRED] Path to the feature decoding config file that produces decoded features.
+feature decoding dir:
+  ../feature_decoding
+feature decoding config:
+  config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml
+
+# Subject/Layer/ROI settings for reconstruction ####################################
+# [REQUIRED]
+recon subjects:
+  - S1
+  - S2
+  - S3
+  - S4
+  - S5
+
+# [REQUIRED]
+recon layers:
+  conv5_3:
+    model: 2022-10-28T10-52-39_transformer_5_3_final
+
+# [REQUIRED]
+recon rois:
+  - ACT
+
+# Model settings for reconstruction ####################################
+# [REQUIRED]
+recon model dir:
+  ../data/models/specvqgan/
+
+# [REQUIRED]
+recon output dir:
+  ./derivatives/reconstruction/specvqgan/decoded/sound_originals
+
+# Settings for evaluation ####################################
+eval model file: 
+  ../data/models/melception/melception-21-05-10T09-28-40.pt
+
+eval feat output dir:
+  ./derivatives/recon_features/specvqgan/decoded/sound_originals/melception
+
+eval true feature dir:
+  ../data/features/VGGishishTest/derivatives/features/pytorch/melception/vggsound_4sec_crop/
