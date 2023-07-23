@@ -1,8 +1,5 @@
 '''DNN Feature decoding - decoders test (prediction) script'''
 
-
-from __future__ import print_function
-
 from itertools import product
 import os
 import shutil
@@ -47,7 +44,8 @@ def featdec_fastl2lir_predict(
     TBA
     '''
 
-    analysis_basename = os.path.splitext(os.path.basename(__file__))[0] + '-' + conf['__filename__']
+    analysis_basename = os.path.splitext(os.path.basename(__file__))[
+        0] + '-' + conf['__filename__']
 
     features_list = features_list[::-1]  # Start training from deep layers
 
@@ -105,7 +103,6 @@ def featdec_fastl2lir_predict(
         # Preparing data
         # --------------
         print('Preparing data')
-
         start_time = time()
 
         # Brain data
@@ -114,17 +111,21 @@ def featdec_fastl2lir_predict(
         try:
             x_labels = data_brain[sbj].get_label(label_key)  # Labels
         except ValueError:
-            print(f'{label_key} not found in vmap. Select numerical values of {label_key} as labels.')
+            print(
+                f'{label_key} not found in vmap. Select numerical values of {label_key} as labels.')
             x_labels = list(data_brain[sbj].select(label_key).flatten())
 
         # Averaging brain data
         if average_sample:
             x_labels_unique = np.unique(x_labels)
-            x_labels_unique = [lb for lb in x_labels_unique if lb not in excluded_labels]
-            x = np.vstack([np.mean(x[(np.array(x_labels) == lb).flatten(), :], axis=0) for lb in x_labels_unique])
+            x_labels_unique = [
+                lb for lb in x_labels_unique if lb not in excluded_labels]
+            x = np.vstack([np.mean(
+                x[(np.array(x_labels) == lb).flatten(), :], axis=0) for lb in x_labels_unique])
         else:
             # Sample No. + Label
-            x_labels_unique = ['sample{:06}-{}'.format(i + 1, lb) for i, lb in enumerate(x_labels)]
+            x_labels_unique = [
+                'sample{:06}-{}'.format(i + 1, lb) for i, lb in enumerate(x_labels)]
 
         print('Elapsed time (data preparation): %f' % (time() - start_time))
 
@@ -134,11 +135,16 @@ def featdec_fastl2lir_predict(
 
         # Preprocessing
         # -------------
-        x_mean = load_array(os.path.join(model_dir, 'x_mean.mat'), key='x_mean')  # shape = (1, n_voxels)
-        x_norm = load_array(os.path.join(model_dir, 'x_norm.mat'), key='x_norm')  # shape = (1, n_voxels)
-        y_mean = load_array(os.path.join(model_dir, 'y_mean.mat'), key='y_mean')  # shape = (1, shape_features)
-        y_norm = load_array(os.path.join(model_dir, 'y_norm.mat'), key='y_norm')  # shape = (1, shape_features)
-
+        x_mean = load_array(os.path.join(model_dir, 'x_mean.mat'),
+                            key='x_mean')  # shape = (1, n_voxels)
+        x_norm = load_array(os.path.join(model_dir, 'x_norm.mat'),
+                            key='x_norm')  # shape = (1, n_voxels)
+        # shape = (1, shape_features)
+        y_mean = load_array(os.path.join(
+            model_dir, 'y_mean.mat'), key='y_mean')
+        # shape = (1, shape_features)
+        y_norm = load_array(os.path.join(
+            model_dir, 'y_norm.mat'), key='y_norm')
         x = (x - x_mean) / x_norm
 
         # Prediction
@@ -178,7 +184,8 @@ def featdec_fastl2lir_predict(
             save_file = os.path.join(results_dir_prediction, '%s.mat' % label)
 
             # Save
-            save_array(save_file, feat, key='feat', dtype=np.float32, sparse=False)
+            save_array(save_file, feat, key='feat',
+                       dtype=np.float32, sparse=False)
 
         print('Saved %s' % results_dir_prediction)
 
@@ -237,8 +244,10 @@ if __name__ == '__main__':
 
     featdec_fastl2lir_predict(
         conf['test fmri'],
-        os.path.join(conf['feature decoder dir'], analysis_name, conf['network']),
-        output_dir=os.path.join(conf['decoded feature dir'], analysis_name, 'decoded_features', conf['network']),
+        os.path.join(conf['feature decoder dir'],
+                     analysis_name, conf['network']),
+        output_dir=os.path.join(
+            conf['decoded feature dir'], analysis_name, 'decoded_features', conf['network']),
         rois_list=conf['rois'],
         label_key=conf['label key'],
         features_list=conf['layers'],

@@ -47,7 +47,8 @@ def featdec_eval(
 
     # True features
     if feature_index_file is not None:
-        features_test = Features(true_feature_dir, feature_index=feature_index_file)
+        features_test = Features(
+            true_feature_dir, feature_index=feature_index_file)
     else:
         features_test = Features(true_feature_dir)
 
@@ -86,16 +87,20 @@ def featdec_eval(
         pred_y = decoded_features.get(layer=layer, subject=subject, roi=roi)
         pred_y = pred_y.reshape(pred_y.shape[0], -1)
         pred_labels = decoded_features.selected_label
-        attend_pred_labels = [pl.split("_unattend_")[0].split("attend_")[1] for pl in pred_labels]
-        unattend_pred_labels = [pl.split("_unattend_")[1] for pl in pred_labels]
+        attend_pred_labels = [pl.split("_unattend_")[0].split("attend_")[
+            1] for pl in pred_labels]
+        unattend_pred_labels = [pl.split("_unattend_")[1]
+                                for pl in pred_labels]
         # Get true features
         true_labels = attend_pred_labels + unattend_pred_labels
         true_labels = np.unique(true_labels)
         true_y = features_test.get(layer=layer, label=true_labels)
         true_y = true_y.reshape(true_y.shape[0], -1)
-        attend_index = [np.where(np.array(true_labels) == x)[0][0] for x in attend_pred_labels]
+        attend_index = [np.where(np.array(true_labels) == x)[0][0]
+                        for x in attend_pred_labels]
         attend_true_features = true_y[attend_index]
-        unattend_index = [np.where(np.array(true_labels) == x)[0][0] for x in unattend_pred_labels]
+        unattend_index = [np.where(np.array(true_labels) == x)[
+            0][0] for x in unattend_pred_labels]
         unattend_true_features = true_y[unattend_index]
         # Load Y mean and SD
         norm_param_dir = os.path.join(
@@ -103,23 +108,32 @@ def featdec_eval(
             layer, subject, roi,
             'model'
         )
-        train_y_mean = hdf5storage.loadmat(os.path.join(norm_param_dir, 'y_mean.mat'))['y_mean']
-        train_y_std = hdf5storage.loadmat(os.path.join(norm_param_dir, 'y_norm.mat'))['y_norm']
+        train_y_mean = hdf5storage.loadmat(
+            os.path.join(norm_param_dir, 'y_mean.mat'))['y_mean']
+        train_y_std = hdf5storage.loadmat(
+            os.path.join(norm_param_dir, 'y_norm.mat'))['y_norm']
 
         # Evaluation
         attend_r_prof = profile_correlation(pred_y, attend_true_features)
         unattend_r_prof = profile_correlation(pred_y, unattend_true_features)
-        attend_r_patt = pattern_correlation(pred_y, attend_true_features, mean=train_y_mean, std=train_y_std)
-        unattend_r_patt = pattern_correlation(pred_y, unattend_true_features, mean=train_y_mean, std=train_y_std)
-        print('Mean profile correlation for attend stimuli:   {}'.format(np.nanmean(attend_r_prof)))
-        print('Mean profile correlation for unattend stimuli: {}'.format(np.nanmean(unattend_r_prof)))
-        print('Mean pattern correlation for attend stimuli:   {}'.format(np.nanmean(attend_r_patt)))
-        print('Mean pattern correlation for unattend stimuli: {}'.format(np.nanmean(unattend_r_patt)))
+        attend_r_patt = pattern_correlation(
+            pred_y, attend_true_features, mean=train_y_mean, std=train_y_std)
+        unattend_r_patt = pattern_correlation(
+            pred_y, unattend_true_features, mean=train_y_mean, std=train_y_std)
+        print('Mean profile correlation for attend stimuli:   {}'.format(
+            np.nanmean(attend_r_prof)))
+        print('Mean profile correlation for unattend stimuli: {}'.format(
+            np.nanmean(unattend_r_prof)))
+        print('Mean pattern correlation for attend stimuli:   {}'.format(
+            np.nanmean(attend_r_patt)))
+        print('Mean pattern correlation for unattend stimuli: {}'.format(
+            np.nanmean(unattend_r_patt)))
         # Attend v.s. Unattend identification
         ident_list = []
         for slide in sample_types:
             print('Sample type: {}'.format(slide))
-            sample_selector = np.array([True if slide in al else False for al in attend_pred_labels])
+            sample_selector = np.array(
+                [True if slide in al else False for al in attend_pred_labels])
             a_attend_r_patt = attend_r_patt[sample_selector]
             a_unattend_r_patt = unattend_r_patt[sample_selector]
             a_ident = (a_attend_r_patt > a_unattend_r_patt).astype(np.float32)
@@ -157,8 +171,8 @@ def featdec_eval(
 # Entry point ################################################################
 
 if __name__ == '__main__':
-    import sys
-    sys.argv = ["", "config/vggsound_attention_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
+    # import sys
+    # sys.argv = ["", "config/vggsound_attention_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -190,7 +204,8 @@ if __name__ == '__main__':
     )
 
     if 'feature index file' in conf:
-        feature_index_file = os.path.join(conf['training feature dir'][0], conf['network'], conf['feature index file'])
+        feature_index_file = os.path.join(
+            conf['training feature dir'][0], conf['network'], conf['feature index file'])
     else:
         feature_index_file = None
 

@@ -208,8 +208,8 @@ def recon_eval(
 # Entry point ################################################################
 
 if __name__ == '__main__':
-    import sys
-    sys.argv = ["", "config/recon_vggsound_attention_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
+    #import sys
+    #sys.argv = ["", "config/recon_vggsound_attention_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
 
     parser = argparse.ArgumentParser()
     parser.add_argument(

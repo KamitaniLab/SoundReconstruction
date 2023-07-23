@@ -4,7 +4,6 @@
 import argparse
 from itertools import product
 import os
-import re
 
 from bdpy.dataform import Features, DecodedFeatures
 from bdpy.evals.metrics import profile_correlation, pattern_correlation, pairwise_identification
@@ -61,7 +60,8 @@ def featdec_eval(
 
     # True features
     if feature_index_file is not None:
-        features_test = Features(true_feature_dir, feature_index=feature_index_file)
+        features_test = Features(
+            true_feature_dir, feature_index=feature_index_file)
     else:
         features_test = Features(true_feature_dir)
 
@@ -101,7 +101,8 @@ def featdec_eval(
         true_labels = pred_labels
         true_y = features_test.get(layer=layer, label=true_labels)
         if not np.array_equal(pred_labels, true_labels):
-            y_index = [np.where(np.array(true_labels) == x)[0][0] for x in pred_labels]
+            y_index = [np.where(np.array(true_labels) == x)[0][0]
+                       for x in pred_labels]
             true_y_sorted = true_y[y_index]
         else:
             true_y_sorted = true_y
@@ -111,22 +112,27 @@ def featdec_eval(
             layer, subject, roi,
             'model'
         )
-        train_y_mean = hdf5storage.loadmat(os.path.join(norm_param_dir, 'y_mean.mat'))['y_mean']
-        train_y_std = hdf5storage.loadmat(os.path.join(norm_param_dir, 'y_norm.mat'))['y_norm']
+        train_y_mean = hdf5storage.loadmat(
+            os.path.join(norm_param_dir, 'y_mean.mat'))['y_mean']
+        train_y_std = hdf5storage.loadmat(
+            os.path.join(norm_param_dir, 'y_norm.mat'))['y_norm']
 
         # Evaluation
         r_prof = profile_correlation(pred_y, true_y_sorted)
-        r_patt = pattern_correlation(pred_y, true_y_sorted, mean=train_y_mean, std=train_y_std)
+        r_patt = pattern_correlation(
+            pred_y, true_y_sorted, mean=train_y_mean, std=train_y_std)
         print('Mean profile correlation:     {}'.format(np.nanmean(r_prof)))
         print('Mean pattern correlation:     {}'.format(np.nanmean(r_patt)))
         # Identification
         ident_list = []
         for slide in sample_types:
             print('Sample type: {}'.format(slide))
-            sample_selector = np.array([True if slide in tl else False for tl in true_labels])
+            sample_selector = np.array(
+                [True if slide in tl else False for tl in true_labels])
             a_pred_y = pred_y[sample_selector, :]
             a_true_y_sorted = true_y_sorted[sample_selector, :]
-            ident_list.append(pairwise_identification(a_pred_y, a_true_y_sorted))
+            ident_list.append(pairwise_identification(
+                a_pred_y, a_true_y_sorted))
         ident = np.nanmean(np.vstack(ident_list), axis=0)
         print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
 
@@ -157,8 +163,8 @@ def featdec_eval(
 # Entry point ################################################################
 
 if __name__ == '__main__':
-    #import sys
-    #sys.argv = ["", "config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
+    # import sys
+    # sys.argv = ["", "config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -190,7 +196,8 @@ if __name__ == '__main__':
     )
 
     if 'feature index file' in conf:
-        feature_index_file = os.path.join(conf['training feature dir'][0], conf['network'], conf['feature index file'])
+        feature_index_file = os.path.join(
+            conf['training feature dir'][0], conf['network'], conf['feature index file'])
     else:
         feature_index_file = None
 

@@ -1,47 +1,72 @@
 # Sound Reconstruction
 
-Data and demo code for [Jon-Yun Park et al., Sound reconstruction from human brain activity via a generative model with brain-like auditory features](https://arxiv.org/abs/2306.11629).
+This repository shows the data and demo code for [Jon-Yun Park et al., Sound reconstruction from human brain activity via a generative model with brain-like auditory features](https://arxiv.org/abs/2306.11629).
 
 ## Dataset
-
-ここにfigshareとかのやつ
-
+- Raw fMRI data: [link@figshare]()
+- Preprocessed fMRI data, DNN features extracted from sound clips: [link@figshare]()
+- Trained transformer models: [link@figshare]()
+- Stimulus sound clips: upon requeset via [Google from link]()
 
 ## Code
 ### Setup
+1. Clone this `SoundReconstruction` repository to your local machine (GPU machine preferred).
+```
+git clone git@github.com:KamitaniLab/SoundReconstruction.git
+```
 
-Create conda environment.
-
+2. Create conda environment using the `specvqgan.yaml`.
 ```
 conda env create --name specvqgan -f specvqgan.yaml 
 python -c "import torch; print(torch.cuda.is_available())"
 # True
 ```
 
-Clone SpecVQGAN repository under "SoundReconstruction" directory.
-Transformerのパスを書き換えているため，Originalのリポジトリではなく，こちらのforkしたリポジトリを使用してください．
-
+3. Clone `SpecVQGAN` repository next to `SoundReconstruction` directory. Please use the following fork repository instead of [the original SpecVQGAN repository](https://github.com/v-iashin/SpecVQGAN) because the path of the Transformer configuration file has been rewritten.
 ```
-# cd to "SoundReconstruction"
 git clone git@github.com:KamitaniLab/SpecVQGAN.git
 ```
 
 ### Download datasets and models
 Download fmri_data and DNN feature files from figshare; 
-see data/README.md
+see [data/README.md](data/README.md)
 Download models from figshare;
-see data/README.md 
+see [data/README.md](data/README.md)
 
 ### Usage
+We provide scripts that reproduce main results in the original paper.
+Please execute the sh files in the following order.
 
+1. Train feature decoders to predict the VGGishsih features. 
+```
+./1_train_batch.sh
+```
 
-train_batch.sh
+2. Using the decoders trained in step.1, perform feature predictions. (Perform the prediction for the attention task dataset at the same time.)
+```
+./2_test_batch.sh
+```
 
-test_batch.sh <- evaluationいれよう
+3. Validate the prediction accuracy of predicted features.
+```
+./3_eval_batch.sh
+```
+Visualize the prediction accuracy with the following notebook. This notebook draws Fig.3D and Fig.3E of the original paper.
+```
+feature_decoding/makefigures_featdec_eval.ipynb
+```
 
-recon_batch.sh
+4. Reconstruct sound clips using predicted features.
+```
+./4_recon_batch.sh
+```
 
-recon_eval_batch.sh <- feature extractionも入れよう
-
-最後に可視化してね
-makefigure.ipynbファイル
+5. Validate the quality of reconstructed sound.
+```
+./5_recon_eval_batch.sh 
+```
+Visualize the reconstruction quality with the following notebooks. These notebooks draws Fig.4C and Fig.8C of the original paper.
+```
+reconstruction/makefigures_recon_eval.ipynb
+reconstruction/makefigures_recon_eval_attention.ipynb
+```

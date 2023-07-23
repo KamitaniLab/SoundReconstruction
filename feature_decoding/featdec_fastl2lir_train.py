@@ -1,8 +1,5 @@
 '''DNN Feature decoding - decoders training script'''
 
-
-from __future__ import print_function
-
 from itertools import product
 import os
 import shutil
@@ -51,7 +48,8 @@ def featdec_fastl2lir_train(
     Note that Y[0] should be sample dimension.
     '''
 
-    analysis_basename = os.path.splitext(os.path.basename(__file__))[0] + '-' + conf['__filename__']
+    analysis_basename = os.path.splitext(os.path.basename(__file__))[
+        0] + '-' + conf['__filename__']
 
     features_list = features_list[::-1]  # Start training from deep layers
 
@@ -70,7 +68,8 @@ def featdec_fastl2lir_train(
                   for sbj, dat_file in fmri_data_files.items()}
 
     if feature_index_file is not None:
-        data_features = Features(os.path.join(features_dir), feature_index=feature_index_file)
+        data_features = Features(os.path.join(
+            features_dir), feature_index=feature_index_file)
     else:
         data_features = Features(os.path.join(features_dir))
 
@@ -97,24 +96,8 @@ def featdec_fastl2lir_train(
 
         # Setup
         # -----
-        analysis_id = analysis_basename + '-' + sbj + '-' + roi + '-' + feat
         results_dir = os.path.join(output_dir, feat, sbj, roi, 'model')
         makedir_ifnot(results_dir)
-
-        # # Check whether the analysis has been done or not.
-        # info_file = os.path.join(results_dir, 'info.yaml')
-        # if os.path.exists(info_file):
-        #     with open(info_file, 'r') as f:
-        #         info = yaml.safe_load(f)
-        #     while info is None:
-        #         warnings.warn('Failed to load info from %s. Retrying...'
-        #                       % info_file)
-        #         with open(info_file, 'r') as f:
-        #             info = yaml.safe_load(f)
-        #     if '_status' in info and 'computation_status' in info['_status']:
-        #         if info['_status']['computation_status'] == 'done':
-        #             print('%s is already done and skipped' % analysis_id)
-        #             continue
 
         # Preparing data
         # --------------
@@ -140,7 +123,8 @@ def featdec_fastl2lir_train(
         # ----------------------------------
 
         # Normalize X (fMRI data)
-        x_mean = np.mean(x, axis=0)[np.newaxis, :]  # np.newaxis was added to match Matlab outputs
+        # np.newaxis was added to match Matlab outputs
+        x_mean = np.mean(x, axis=0)[np.newaxis, :]
         x_norm = np.std(x, axis=0, ddof=1)[np.newaxis, :]
 
         # Normalize Y (DNN features)
@@ -149,7 +133,8 @@ def featdec_fastl2lir_train(
 
         # Y index to sort Y by X (matching samples)
         # -----------------------------------------
-        y_index = np.array([np.where(np.array(y_labels) == xl) for xl in x_labels]).flatten()
+        y_index = np.array([np.where(np.array(y_labels) == xl)
+                           for xl in x_labels]).flatten()
 
         # Save normalization parameters
         # -----------------------------
@@ -161,10 +146,12 @@ def featdec_fastl2lir_train(
             save_file = os.path.join(results_dir, sv + '.mat')
             if not os.path.exists(save_file):
                 try:
-                    save_array(save_file, norm_param[sv], key=sv, dtype=np.float32, sparse=False)
+                    save_array(
+                        save_file, norm_param[sv], key=sv, dtype=np.float32, sparse=False)
                     print('Saved %s' % save_file)
                 except Exception:
-                    warnings.warn('Failed to save %s. Possibly double running.' % save_file)
+                    warnings.warn(
+                        'Failed to save %s. Possibly double running.' % save_file)
 
         # Preparing learning
         # ------------------
@@ -202,7 +189,8 @@ def featdec_fastl2lir_train(
 
         train.run()
 
-        print('Total elapsed time (model training): %f' % (time() - start_time))
+        print('Total elapsed time (model training): %f' %
+              (time() - start_time))
 
     print('%s finished.' % analysis_basename)
 
@@ -213,8 +201,9 @@ def featdec_fastl2lir_train(
 
 if __name__ == '__main__':
     import sys
-    sys.argv = ["", "config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
-    
+    sys.argv = [
+        "", "config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         'conf',
@@ -233,9 +222,11 @@ if __name__ == '__main__':
     })
 
     if 'analysis name' in conf:
-        feature_decoders_dir = os.path.join(conf['feature decoder dir'], conf['analysis name'], conf['network'])
+        feature_decoders_dir = os.path.join(
+            conf['feature decoder dir'], conf['analysis name'], conf['network'])
     else:
-        feature_decoders_dir = os.path.join(conf['feature decoder dir'], conf['network'])
+        feature_decoders_dir = os.path.join(
+            conf['feature decoder dir'], conf['network'])
 
     if 'feature index file' in conf:
         feature_index_file = os.path.join(
