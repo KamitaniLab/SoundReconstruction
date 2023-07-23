@@ -68,6 +68,8 @@ def featdec_eval(
             'identification accuracy',
         ])
 
+    sample_types = ["slide0", "slide1", "slide2"]
+
     for layer, subject, roi in product(features, subjects, rois):
         print('Layer: {} - Subject: {} - ROI: {}'.format(layer, subject, roi))
 
@@ -109,13 +111,23 @@ def featdec_eval(
         unattend_r_prof = profile_correlation(pred_y, unattend_true_features)
         attend_r_patt = pattern_correlation(pred_y, attend_true_features, mean=train_y_mean, std=train_y_std)
         unattend_r_patt = pattern_correlation(pred_y, unattend_true_features, mean=train_y_mean, std=train_y_std)
-        # Attend v.s. Unattend identification
-        ident = attend_r_patt > unattend_r_patt
-        ident = ident.astype(np.float32)
         print('Mean profile correlation for attend stimuli:   {}'.format(np.nanmean(attend_r_prof)))
         print('Mean profile correlation for unattend stimuli: {}'.format(np.nanmean(unattend_r_prof)))
         print('Mean pattern correlation for attend stimuli:   {}'.format(np.nanmean(attend_r_patt)))
         print('Mean pattern correlation for unattend stimuli: {}'.format(np.nanmean(unattend_r_patt)))
+        # Attend v.s. Unattend identification
+        ident_list = []
+        for slide in sample_types:
+            print('Sample type: {}'.format(slide))
+            sample_selector = np.array([True if slide in al else False for al in attend_pred_labels])
+            a_attend_r_patt = attend_r_patt[sample_selector]
+            a_unattend_r_patt = unattend_r_patt[sample_selector]
+            a_ident = (a_attend_r_patt > a_unattend_r_patt).astype(np.float32)
+            ident_list.append(a_ident)
+        ident = np.nanmean(np.vstack(ident_list), axis=0)
+        nan_rows = np.isnan(ident)
+        ident = (ident > 0.5).astype(np.float32)
+        ident[nan_rows] = np.nan
         print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
         perf_df = perf_df.append(
             {

@@ -80,69 +80,68 @@ def featdec_eval(
             'profile correlation', 'pattern correlation', 'identification accuracy'
         ])
 
-    for layer in features:
-        print('Layer: {}'.format(layer))
+    sample_types = ["slide0", "slide1", "slide2"]
 
-        for subject, roi in product(subjects, rois):
-            print('Subject: {} - ROI: {}'.format(subject, roi))
+    for layer, subject, roi in product(features, subjects, rois):
+        print('Layer: {} - Subject: {} - ROI: {}'.format(layer, subject, roi))
 
-            if len(perf_df.query(
-                    'layer == "{}" and subject == "{}" and roi == "{}"'.format(
-                        layer, subject, roi
-                    )
-            )) > 0:
-                print('Already done. Skipped.')
-                continue
+        # Check if already calculated
+        if len(perf_df.query(
+                'layer == "{}" and subject == "{}" and roi == "{}"'.format(
+                    layer, subject, roi
+                )
+        )) > 0:
+            print('Already done. Skipped.')
+            continue
 
-            pred_y = decoded_features.get(layer=layer, subject=subject, roi=roi)
-            pred_labels = decoded_features.selected_label
+        # Get predicted features
+        pred_y = decoded_features.get(layer=layer, subject=subject, roi=roi)
+        pred_labels = decoded_features.selected_label
+        # Get true features
+        true_labels = pred_labels
+        true_y = features_test.get(layer=layer, label=true_labels)
+        if not np.array_equal(pred_labels, true_labels):
+            y_index = [np.where(np.array(true_labels) == x)[0][0] for x in pred_labels]
+            true_y_sorted = true_y[y_index]
+        else:
+            true_y_sorted = true_y
+        # Get train mean for normalization
+        norm_param_dir = os.path.join(
+            feature_decoder_dir,
+            layer, subject, roi,
+            'model'
+        )
+        train_y_mean = hdf5storage.loadmat(os.path.join(norm_param_dir, 'y_mean.mat'))['y_mean']
+        train_y_std = hdf5storage.loadmat(os.path.join(norm_param_dir, 'y_norm.mat'))['y_norm']
 
-            if single_trial:
-                pred_labels = [re.match('sample\d*-(.*)', x).group(1) for x in pred_labels]
+        # Evaluation
+        r_prof = profile_correlation(pred_y, true_y_sorted)
+        r_patt = pattern_correlation(pred_y, true_y_sorted, mean=train_y_mean, std=train_y_std)
+        print('Mean profile correlation:     {}'.format(np.nanmean(r_prof)))
+        print('Mean pattern correlation:     {}'.format(np.nanmean(r_patt)))
+        # Identification
+        ident_list = []
+        for slide in sample_types:
+            print('Sample type: {}'.format(slide))
+            sample_selector = np.array([True if slide in tl else False for tl in true_labels])
+            a_pred_y = pred_y[sample_selector, :]
+            a_true_y_sorted = true_y_sorted[sample_selector, :]
+            ident_list.append(pairwise_identification(a_pred_y, a_true_y_sorted))
+        ident = np.nanmean(np.vstack(ident_list), axis=0)
+        print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
 
-            true_labels = pred_labels
-            true_y = features_test.get(layer=layer, label=true_labels)
-
-            if not np.array_equal(pred_labels, true_labels):
-                y_index = [np.where(np.array(true_labels) == x)[0][0] for x in pred_labels]
-                true_y_sorted = true_y[y_index]
-            else:
-                true_y_sorted = true_y
-
-            # Load Y mean and SD
-            # Proposed by Ken Shirakawa. See https://github.com/KamitaniLab/brain-decoding-cookbook/issues/13.
-            norm_param_dir = os.path.join(
-                feature_decoder_dir,
-                layer, subject, roi,
-                'model'
-            )
-
-            train_y_mean = hdf5storage.loadmat(os.path.join(norm_param_dir, 'y_mean.mat'))['y_mean']
-            train_y_std = hdf5storage.loadmat(os.path.join(norm_param_dir, 'y_norm.mat'))['y_norm']
-
-            r_prof = profile_correlation(pred_y, true_y_sorted)
-            r_patt = pattern_correlation(pred_y, true_y_sorted, mean=train_y_mean, std=train_y_std)
-
-            if single_trial:
-                ident = pairwise_identification(pred_y, true_y, single_trial=True, pred_labels=pred_labels, true_labels=true_labels)
-            else:
-                ident = pairwise_identification(pred_y, true_y_sorted)
-
-            print('Mean profile correlation:     {}'.format(np.nanmean(r_prof)))
-            print('Mean pattern correlation:     {}'.format(np.nanmean(r_patt)))
-            print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
-
-            perf_df = perf_df.append(
-                {
-                    'layer':   layer,
-                    'subject': subject,
-                    'roi':     roi,
-                    'profile correlation': r_prof.flatten(),
-                    'pattern correlation': r_patt.flatten(),
-                    'identification accuracy': ident.flatten(),
-                },
-                ignore_index=True
-            )
+        # Store results
+        perf_df = perf_df.append(
+            {
+                'layer':   layer,
+                'subject': subject,
+                'roi':     roi,
+                'profile correlation': r_prof.flatten(),
+                'pattern correlation': r_patt.flatten(),
+                'identification accuracy': ident.flatten(),
+            },
+            ignore_index=True
+        )
 
     print(perf_df)
 
@@ -158,6 +157,9 @@ def featdec_eval(
 # Entry point ################################################################
 
 if __name__ == '__main__':
+    #import sys
+    #sys.argv = ["", "config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         'conf',

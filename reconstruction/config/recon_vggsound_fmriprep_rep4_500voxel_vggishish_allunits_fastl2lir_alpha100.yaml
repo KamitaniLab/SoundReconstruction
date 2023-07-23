@@ -9,6 +9,7 @@ specvqgan dir:
 # [REQUIRED] Path to the feature decoding config file that produces decoded features.
 feature decoding dir:
   ../feature_decoding
+
 feature decoding config:
   config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml
 
@@ -28,7 +29,7 @@ recon layers:
 
 # [REQUIRED]
 recon rois:
-  - ACT
+  - AC
 
 # Model settings for reconstruction ####################################
 # [REQUIRED]
@@ -37,14 +38,14 @@ recon model dir:
 
 # [REQUIRED]
 recon output dir:
-  ./derivatives/reconstruction/specvqgan/decoded/sound_originals
+  ../data/reconstruction/VGGishish/sound_recon
 
 # Settings for evaluation ####################################
 eval model file: 
   ../data/models/melception/melception-21-05-10T09-28-40.pt
 
 eval feat output dir:
-  ./derivatives/recon_features/specvqgan/decoded/sound_originals/melception
+  ../data/recon_features/VGGishish/sound_recon/melception
 
 eval true feature dir:
-  ../data/features/VGGishishTest/derivatives/features/pytorch/melception/vggsound_4sec_crop/
+  ../data/features/VGGishishTest/melception/vggsound_4sec_crop/

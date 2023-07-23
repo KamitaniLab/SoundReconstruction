@@ -8,9 +8,36 @@ import os
 import numpy as np
 import pandas as pd
 import yaml
+from scipy.spatial.distance import euclidean
 
 from bdpy.dataform import Features
 from bdpy.evals.metrics import profile_correlation, pattern_correlation, pairwise_identification
+
+
+# Functions #######################################################################
+
+
+def get_euclidean_distance_matrix(xa, xb):
+    """
+    Calculate euclidean distance matrix by remove nan columns in each pair.
+    """
+    assert xa.shape[0] == xb.shape[0]
+    if xa.ndim != 2:
+        xa = xa.reshape(xa.shape[0], -1)
+    if xb.ndim != 2:
+        xb = xb.reshape(xb.shape[0], -1)
+
+    dist_mat = np.zeros((xa.shape[0], xb.shape[0]))
+    for i in range(xa.shape[0]):
+        for j in range(xb.shape[0]):
+            nan_col = np.logical_or(np.isnan(xa[i]), np.isnan(xb[j]))
+            if np.sum(nan_col) == xa.shape[1]:
+                dist_mat[i, j] = np.nan
+            else:
+                xa_ = xa[i][~nan_col]
+                xb_ = xb[j][~nan_col]
+                dist_mat[i, j] = euclidean(xa_, xb_)
+    return dist_mat
 
 
 # Main #######################################################################
@@ -53,6 +80,8 @@ def recon_eval(
             'layer', 'subject', 'roi', 'eval_feat',
         ])
 
+    sample_types = ["slide0", "slide1", "slide2"]
+
     for sbj, layer, roi in product(subjects, layers, rois):
         print('Subject: {} - Layer: {} - ROI: {}'.format(sbj, layer, roi))
         for eval_feat in eval_features:
@@ -86,23 +115,32 @@ def recon_eval(
                 if eval_feat == 'hnr':
                     pass
                 elif eval_feat == 'sc':
-                    recon_y = np.nanmedian(recon_y, axis=1)
-                    true_y_sorted = np.nanmedian(true_y_sorted, axis=1)
+                    recon_y = np.nanmedian(recon_y, axis=1).reshape(recon_y.shape[0], -1)
+                    true_y_sorted = np.nanmedian(true_y_sorted, axis=1).reshape(recon_y.shape[0], -1)
                 elif eval_feat == 'f0':
-                    recon_y = np.nanmean(recon_y, axis=1)
-                    true_y_sorted = np.nanmean(true_y_sorted, axis=1)
-                dist = np.abs(recon_y - true_y_sorted)
-                ident = []
-                for i in range(recon_y.shape[0]):
-                    if np.isnan(recon_y[i]):
-                        ident.append(np.nan)
-                    else:
-                        win = np.array(np.abs(true_y_sorted - recon_y[i]) > dist[i], dtype=np.float32)
-                        win[i] = np.nan
-                        win[np.isnan(true_y_sorted)] = np.nan
-                        ident.append(np.nanmean(win))
-                ident = np.array(ident)
-                print('Mean euclidean distance:      {}'.format(np.nanmean(dist)))
+                    recon_y = np.nanmean(recon_y, axis=1).reshape(recon_y.shape[0], -1)
+                    true_y_sorted = np.nanmean(true_y_sorted, axis=1).reshape(recon_y.shape[0], -1)
+                # Calculate distance matrix
+                dist_mat = get_euclidean_distance_matrix(recon_y, true_y_sorted)
+                dist = dist_mat.diagonal()
+                print('Mean euclidean distance: {}'.format(np.nanmean(dist)))
+                # Identification
+                ident_list = []
+                for slide in sample_types:
+                    print('Sample type: {}'.format(slide))
+                    sample_selector = np.array([True if slide in tl else False for tl in true_labels])
+                    a_dist_mat = dist_mat[np.ix_(sample_selector, sample_selector)]
+                    ident = []
+                    for i in range(a_dist_mat.shape[0]):
+                        if np.isnan(a_dist_mat[i, i]):
+                            ident.append(np.nan)
+                        else:
+                            win = np.array(a_dist_mat[i, i] < a_dist_mat[i], dtype=np.float32)
+                            win[i] = np.nan
+                            win[np.isnan(a_dist_mat[i])] = np.nan
+                            ident.append(np.nanmean(win))
+                    ident = np.array(ident)
+                    ident_list.append(ident)
                 print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
                 perf_df = perf_df.append(
                     {

@@ -8,9 +8,35 @@ import os
 import numpy as np
 import pandas as pd
 import yaml
+from scipy.spatial.distance import euclidean
 
 from bdpy.dataform import Features
 from bdpy.evals.metrics import profile_correlation, pattern_correlation
+
+
+# Functions #######################################################################
+
+
+def get_euclidean_distance(xa, xb):
+    """
+    Calculate euclidean distance by remove nan columns in each pair.
+    """
+    assert xa.shape[0] == xb.shape[0]
+    if xa.ndim != 2:
+        xa = xa.reshape(xa.shape[0], -1)
+    if xb.ndim != 2:
+        xb = xb.reshape(xb.shape[0], -1)
+
+    dist_list = []
+    for i in range(xa.shape[0]):
+        nan_col = np.logical_or(np.isnan(xa[i]), np.isnan(xb[i]))
+        if np.sum(nan_col) == xa.shape[1]:
+            dist_list.append(np.nan)
+        else:
+            xa_ = xa[i][~nan_col]
+            xb_ = xb[i][~nan_col]
+            dist_list.append(euclidean(xa_, xb_))
+    return np.array(dist_list)
 
 
 # Main #######################################################################
@@ -53,6 +79,8 @@ def recon_eval(
             'layer', 'subject', 'roi', 'eval_feat'
         ])
 
+    sample_types = ["slide0", "slide1", "slide2"]
+
     for sbj, layer, roi in product(subjects, layers, rois):
         print('Subject: {} - Layer: {} - ROI: {}'.format(sbj, layer, roi))
         for eval_feat in eval_features:
@@ -87,22 +115,33 @@ def recon_eval(
                 if eval_feat == 'hnr':
                     pass
                 elif eval_feat == 'sc':
-                    recon_y = np.nanmedian(recon_y, axis=1)
-                    attend_true_features = np.nanmedian(attend_true_features, axis=1)
-                    unattend_true_features = np.nanmean(unattend_true_features, axis=1)
+                    recon_y = np.nanmedian(recon_y, axis=1).reshape(recon_y.shape[0], -1)
+                    attend_true_features = np.nanmedian(attend_true_features, axis=1).reshape(recon_y.shape[0], -1)
+                    unattend_true_features = np.nanmean(unattend_true_features, axis=1).reshape(recon_y.shape[0], -1)
                 elif eval_feat == 'f0':
-                    recon_y = np.nanmean(recon_y, axis=1)
-                    attend_true_features = np.nanmean(attend_true_features, axis=1)
-                    unattend_true_features = np.nanmean(unattend_true_features, axis=1)
-                # Evaluation
-                attend_d = np.abs(recon_y - attend_true_features)
-                unattend_d = np.abs(recon_y - unattend_true_features)
-                # Attend v.s. Unattend identification
-                nan_rows = np.logical_or(np.isnan(attend_d), np.isnan(unattend_d))
-                ident = (attend_d < unattend_d).astype(np.float32)
-                ident[nan_rows] = np.nan
+                    recon_y = np.nanmean(recon_y, axis=1).reshape(recon_y.shape[0], -1)
+                    attend_true_features = np.nanmean(attend_true_features, axis=1).reshape(recon_y.shape[0], -1)
+                    unattend_true_features = np.nanmean(unattend_true_features, axis=1).reshape(recon_y.shape[0], -1)
+                # Calculate distance matrix
+                attend_d = get_euclidean_distance(recon_y, attend_true_features)
+                unattend_d = get_euclidean_distance(recon_y, unattend_true_features)
                 print('Mean euclidean distance for attend stimuli:   {}'.format(np.nanmean(attend_d)))
                 print('Mean euclidean distance for unattend stimuli: {}'.format(np.nanmean(unattend_d)))
+                # Attend v.s. Unattend identification
+                ident_list = []
+                for slide in sample_types:
+                    print('Sample type: {}'.format(slide))
+                    sample_selector = np.array([True if slide in al else False for al in attend_recon_labels])
+                    a_attend_d = attend_d[sample_selector]
+                    a_unattend_d = unattend_d[sample_selector]
+                    nan_rows = np.logical_or(np.isnan(a_attend_d), np.isnan(a_unattend_d))
+                    a_ident = (a_attend_d < a_unattend_d).astype(np.float32)
+                    a_ident[nan_rows] = np.nan
+                    ident_list.append(a_ident)
+                ident = np.nanmean(np.vstack(ident_list), axis=0)
+                nan_rows = np.logical_or(np.isnan(ident), (ident == 0.5))
+                ident = (ident > 0.5).astype(np.float32)
+                ident[nan_rows] = np.nan
                 print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
                 perf_df = perf_df.append(
                     {
@@ -122,13 +161,23 @@ def recon_eval(
                 unattend_r_prof = profile_correlation(recon_y, unattend_true_features)
                 attend_r_patt = pattern_correlation(recon_y, attend_true_features)
                 unattend_r_patt = pattern_correlation(recon_y, unattend_true_features)
-                # Attend v.s. Unattend identification
-                ident = attend_r_patt > unattend_r_patt
-                ident = ident.astype(np.float32)
                 print('Mean profile correlation for attend stimuli:   {}'.format(np.nanmean(attend_r_prof)))
                 print('Mean profile correlation for unattend stimuli: {}'.format(np.nanmean(unattend_r_prof)))
                 print('Mean pattern correlation for attend stimuli:   {}'.format(np.nanmean(attend_r_patt)))
                 print('Mean pattern correlation for unattend stimuli: {}'.format(np.nanmean(unattend_r_patt)))
+                # Attend v.s. Unattend identification
+                ident_list = []
+                for slide in sample_types:
+                    print('Sample type: {}'.format(slide))
+                    sample_selector = np.array([True if slide in al else False for al in attend_recon_labels])
+                    a_attend_r_patt = attend_r_patt[sample_selector]
+                    a_unattend_r_patt = unattend_r_patt[sample_selector]
+                    a_ident = (a_attend_r_patt > a_unattend_r_patt).astype(np.float32)
+                    ident_list.append(a_ident)
+                ident = np.nanmean(np.vstack(ident_list), axis=0)
+                nan_rows = np.isnan(ident)
+                ident = (ident > 0.5).astype(np.float32)
+                ident[nan_rows] = np.nan
                 print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
                 perf_df = perf_df.append(
                     {
@@ -159,8 +208,8 @@ def recon_eval(
 # Entry point ################################################################
 
 if __name__ == '__main__':
-    #import sys
-    #sys.argv = ["", "config/recon_vggsound_attention_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
+    import sys
+    sys.argv = ["", "config/recon_vggsound_attention_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
 
     parser = argparse.ArgumentParser()
     parser.add_argument(

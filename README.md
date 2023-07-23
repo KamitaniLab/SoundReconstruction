@@ -2,8 +2,14 @@
 
 Data and demo code for [Jon-Yun Park et al., Sound reconstruction from human brain activity via a generative model with brain-like auditory features](https://arxiv.org/abs/2306.11629).
 
-## Preparation
-### Prepare environment
+## Dataset
+
+ここにfigshareとかのやつ
+
+
+## Code
+### Setup
+
 Create conda environment.
 
 ```
@@ -20,13 +26,22 @@ Transformerのパスを書き換えているため，Originalのリポジトリ�
 git clone git@github.com:KamitaniLab/SpecVQGAN.git
 ```
 
-### Download datasets
+### Download datasets and models
 Download fmri_data and DNN feature files from figshare; 
 see data/README.md
-
-### Download models
 Download models from figshare;
 see data/README.md 
 
-## Usage
+### Usage
 
+
+train_batch.sh
+
+test_batch.sh <- evaluationいれよう
+
+recon_batch.sh
+
+recon_eval_batch.sh <- feature extractionも入れよう
+
+最後に可視化してね
+makefigure.ipynbファイル

@@ -27,8 +27,7 @@ test fmri:
 
 # The ROIs used in feature decoding
 rois:
-  AC : hcp180_r_lh.L_A1_ROI = 1 | hcp180_r_lh.L_MBelt_ROI = 1 | hcp180_r_lh.L_PBelt_ROI = 1 | hcp180_r_lh.L_RI_ROI = 1 | hcp180_r_lh.L_A4_ROI = 1 | hcp180_r_lh.L_A5_ROI = 1 | hcp180_r_rh.R_A1_ROI = 1 | hcp180_r_rh.R_MBelt_ROI = 1 | hcp180_r_rh.R_PBelt_ROI = 1 | hcp180_r_rh.R_RI_ROI = 1 | hcp180_r_rh.R_A4_ROI = 1 | hcp180_r_rh.R_A5_ROI = 1 | hcp180_r_lh.L_LBelt_ROI = 1 | hcp180_r_rh.R_LBelt_ROI = 1 
-  ACT : hcp180_r_lh.L_A1_ROI = 1 | hcp180_r_lh.L_MBelt_ROI = 1 | hcp180_r_lh.L_PBelt_ROI = 1 | hcp180_r_lh.L_RI_ROI = 1 | hcp180_r_lh.L_A4_ROI = 1 | hcp180_r_lh.L_A5_ROI = 1 | hcp180_r_lh.L_STSdp_ROI = 1 | hcp180_r_lh.L_STSda_ROI = 1 | hcp180_r_lh.L_STSvp_ROI = 1 | hcp180_r_lh.L_STSva_ROI = 1 | hcp180_r_lh.L_STGa_ROI = 1 | hcp180_r_lh.L_TA2_ROI = 1 | hcp180_r_rh.R_A1_ROI = 1 | hcp180_r_rh.R_MBelt_ROI = 1 | hcp180_r_rh.R_PBelt_ROI = 1 | hcp180_r_rh.R_RI_ROI = 1 | hcp180_r_rh.R_A4_ROI = 1 | hcp180_r_rh.R_A5_ROI = 1 | hcp180_r_rh.R_STSdp_ROI = 1 | hcp180_r_rh.R_STSda_ROI = 1 | hcp180_r_rh.R_STSvp_ROI = 1 | hcp180_r_rh.R_STSva_ROI = 1 | hcp180_r_rh.R_STGa_ROI = 1 | hcp180_r_rh.R_TA2_ROI | hcp180_r_lh.L_LBelt_ROI = 1 | hcp180_r_rh.R_LBelt_ROI = 1 
+  AC : hcp180_r_lh.L_A1_ROI = 1 | hcp180_r_lh.L_MBelt_ROI = 1 | hcp180_r_lh.L_PBelt_ROI = 1 | hcp180_r_lh.L_RI_ROI = 1 | hcp180_r_lh.L_A4_ROI = 1 | hcp180_r_lh.L_A5_ROI = 1 | hcp180_r_lh.L_STSdp_ROI = 1 | hcp180_r_lh.L_STSda_ROI = 1 | hcp180_r_lh.L_STSvp_ROI = 1 | hcp180_r_lh.L_STSva_ROI = 1 | hcp180_r_lh.L_STGa_ROI = 1 | hcp180_r_lh.L_TA2_ROI = 1 | hcp180_r_rh.R_A1_ROI = 1 | hcp180_r_rh.R_MBelt_ROI = 1 | hcp180_r_rh.R_PBelt_ROI = 1 | hcp180_r_rh.R_RI_ROI = 1 | hcp180_r_rh.R_A4_ROI = 1 | hcp180_r_rh.R_A5_ROI = 1 | hcp180_r_rh.R_STSdp_ROI = 1 | hcp180_r_rh.R_STSda_ROI = 1 | hcp180_r_rh.R_STSvp_ROI = 1 | hcp180_r_rh.R_STSva_ROI = 1 | hcp180_r_rh.R_STGa_ROI = 1 | hcp180_r_rh.R_TA2_ROI | hcp180_r_lh.L_LBelt_ROI = 1 | hcp180_r_rh.R_LBelt_ROI = 1 
   A1 :  hcp180_r_lh.L_A1_ROI = 1  |  hcp180_r_rh.R_A1_ROI = 1 
   LBelt : hcp180_r_lh.L_LBelt_ROI = 1 | hcp180_r_rh.R_LBelt_ROI = 1
   PBelt : hcp180_r_lh.L_PBelt_ROI = 1  | hcp180_r_rh.R_PBelt_ROI = 1 
@@ -68,13 +67,13 @@ label key:
 
 # DNN features ###############################################################
 training feature dir:
-  - ../data/features/VGGishishTrain/derivatives/features
+  - ../data/features/VGGishishTrain/
 
 test feature dir:
-  - ../data/features/VGGishishTest/derivatives/features
+  - ../data/features/VGGishishTest/
 
 network:
-  pytorch/vggishish/vggsound_4sec_crop
+  vggishish/vggsound_4sec_crop
 
 layers:
 #   - conv1_1
@@ -97,11 +96,12 @@ layers:
 
 # Feature decoding ###########################################################
 feature decoder dir:
-  ./derivatives/feature_decoders
+  ../data/feature_decoders/VGGishish/sound_recon
 
 # Decoded features
 decoded feature dir:
-  ./derivatives/decoded_features
+  ../data/decoded_features/VGGishish/sound_recon
+
 test average num:
   8
 
@@ -111,4 +111,4 @@ chunk axis: 1
 
 # Figure output
 decoding figure dir:
-  ./derivatives/figures
+  ../data/figures

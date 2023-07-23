@@ -28,7 +28,7 @@ recon layers:
 
 # [REQUIRED]
 recon rois:
-  - ACT
+  - AC
 
 # Model settings for reconstruction ####################################
 # [REQUIRED]
@@ -37,11 +37,14 @@ recon model dir:
 
 # [REQUIRED]
 recon output dir:
-  ./derivatives/reconstruction_attention/specvqgan/decoded/sound_originals
+  ../data/reconstruction/VGGishish/sound_attention
 
 # Settings for evaluation ####################################
 eval model file: 
   ../data/models/melception/melception-21-05-10T09-28-40.pt
 
 eval feat output dir:
-  ./derivatives/recon_features_attention/specvqgan/decoded/sound_originals/melception
+  ../data/recon_features/VGGishish/sound_attention/melception
+
+eval true feature dir:
+  ../data/features/VGGishishTest/derivatives/features/pytorch/melception/vggsound_4sec_crop/
