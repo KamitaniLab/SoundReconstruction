@@ -40,7 +40,7 @@ def recon_sound(
     lib_path,
     features_dir, features_decoders_dir,
     output_dir, model_dir,
-    subjects, layers, rois,
+    subjects, layers, rois, seed,
     test_average_num,
 ):
     '''
@@ -85,6 +85,9 @@ def recon_sound(
 
         dec_features.get(layer=layer, subject=sbj, roi=roi)
         dec_labels = dec_features.selected_label
+
+        # initialize random seed
+        torch.manual_seed(seed)
 
         # Loop for recon
         for i, label in enumerate(dec_labels):
@@ -221,9 +224,10 @@ def recon_sound(
 
 
 if __name__ == '__main__':
-    # import sys
+    import sys
     # sys.argv = ["", "config/recon_vggsound_attention_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
-    # sys.argv = ["", "config/recon_vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
+    sys.argv = [
+        "", "config/recon_vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -280,5 +284,6 @@ if __name__ == '__main__':
         subjects=conf['recon subjects'],
         layers=conf['recon layers'],
         rois=conf['recon rois'],
+        seed=conf['seed'],
         test_average_num=conf['feature decoding']['test average num'],
     )
