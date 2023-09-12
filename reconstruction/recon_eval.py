@@ -103,12 +103,6 @@ def recon_eval(
             # Get true features
             true_labels = recon_labels[:]
             true_y = features_test.get(layer=eval_feat, label=true_labels)
-            # Match the order of samples
-            if not np.array_equal(recon_labels, true_labels):
-                y_index = [np.where(np.array(true_labels) == x)[0][0] for x in recon_labels]
-                true_y_sorted = true_y[y_index]
-            else:
-                true_y_sorted = true_y
 
             if audio_feature_mode:
                 # Convert features
@@ -116,31 +110,33 @@ def recon_eval(
                     pass
                 elif eval_feat == 'sc':
                     recon_y = np.nanmedian(recon_y, axis=1).reshape(recon_y.shape[0], -1)
-                    true_y_sorted = np.nanmedian(true_y_sorted, axis=1).reshape(recon_y.shape[0], -1)
+                    true_y = np.nanmedian(true_y, axis=1).reshape(true_y.shape[0], -1)
                 elif eval_feat == 'f0':
                     recon_y = np.nanmean(recon_y, axis=1).reshape(recon_y.shape[0], -1)
-                    true_y_sorted = np.nanmean(true_y_sorted, axis=1).reshape(recon_y.shape[0], -1)
+                    true_y = np.nanmean(true_y, axis=1).reshape(true_y.shape[0], -1)
                 # Calculate distance matrix
-                dist_mat = get_euclidean_distance_matrix(recon_y, true_y_sorted)
+                dist_mat = get_euclidean_distance_matrix(recon_y, true_y)
                 dist = dist_mat.diagonal()
                 print('Mean euclidean distance: {}'.format(np.nanmean(dist)))
                 # Identification
                 ident_list = []
                 for slide in sample_types:
                     print('Sample type: {}'.format(slide))
-                    sample_selector = np.array([True if slide in tl else False for tl in true_labels])
-                    a_dist_mat = dist_mat[np.ix_(sample_selector, sample_selector)]
+                    sample_selector = np.where(np.array([True if slide in tl else False for tl in true_labels]))[0]
                     ident = []
-                    for i in range(a_dist_mat.shape[0]):
-                        if np.isnan(a_dist_mat[i, i]):
+                    for i in range(len(sample_selector)):
+                        target = dist_mat[sample_selector[i], sample_selector[i]] 
+                        candidates = dist_mat[sample_selector[i], :]
+                        candidates = np.delete(candidates, sample_selector[i]) # remove target itself
+                        candidates = candidates[~np.isnan(candidates)] # remove nan values
+                        if np.isnan(target):
                             ident.append(np.nan)
                         else:
-                            win = np.array(a_dist_mat[i, i] < a_dist_mat[i], dtype=np.float32)
-                            win[i] = np.nan
-                            win[np.isnan(a_dist_mat[i])] = np.nan
+                            win = np.array(target < candidates, dtype=np.float32)
                             ident.append(np.nanmean(win))
                     ident = np.array(ident)
                     ident_list.append(ident)
+                ident = np.nanmean(np.vstack(ident_list), axis=0)
                 print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
                 perf_df = perf_df.append(
                     {
@@ -155,9 +151,21 @@ def recon_eval(
                 )
             else:
                 # Evaluation
-                r_prof = profile_correlation(recon_y, true_y_sorted)
-                r_patt = pattern_correlation(recon_y, true_y_sorted)
-                ident = pairwise_identification(recon_y, true_y_sorted)
+                r_prof = profile_correlation(recon_y, true_y)
+                r_patt = pattern_correlation(recon_y, true_y)
+                ident = pairwise_identification(recon_y, true_y)
+                # Identification
+                ident_list = []
+                for slide in sample_types:
+                    print('Sample type: {}'.format(slide))
+                    sample_selector = np.array(
+                        [True if slide in tl else False for tl in true_labels])
+                    a_recon_y = recon_y[sample_selector, :]
+                    a_recon_labels = np.array(recon_labels)[sample_selector]
+                    ident_list.append(pairwise_identification(
+                        a_recon_y, true_y, single_trial=True, 
+                        pred_labels=a_recon_labels, true_labels=true_labels))        
+                ident = np.nanmean(np.vstack(ident_list), axis=0)
                 print('Mean profile correlation:     {}'.format(np.nanmean(r_prof)))
                 print('Mean pattern correlation:     {}'.format(np.nanmean(r_patt)))
                 print('Mean identification accuracy: {}'.format(np.nanmean(ident)))

@@ -100,12 +100,7 @@ def featdec_eval(
         # Get true features
         true_labels = pred_labels
         true_y = features_test.get(layer=layer, label=true_labels)
-        if not np.array_equal(pred_labels, true_labels):
-            y_index = [np.where(np.array(true_labels) == x)[0][0]
-                       for x in pred_labels]
-            true_y_sorted = true_y[y_index]
-        else:
-            true_y_sorted = true_y
+        
         # Get train mean for normalization
         norm_param_dir = os.path.join(
             feature_decoder_dir,
@@ -118,9 +113,9 @@ def featdec_eval(
             os.path.join(norm_param_dir, 'y_norm.mat'))['y_norm']
 
         # Evaluation
-        r_prof = profile_correlation(pred_y, true_y_sorted)
+        r_prof = profile_correlation(pred_y, true_y)
         r_patt = pattern_correlation(
-            pred_y, true_y_sorted, mean=train_y_mean, std=train_y_std)
+            pred_y, true_y, mean=train_y_mean, std=train_y_std)
         print('Mean profile correlation:     {}'.format(np.nanmean(r_prof)))
         print('Mean pattern correlation:     {}'.format(np.nanmean(r_patt)))
         # Identification
@@ -130,9 +125,10 @@ def featdec_eval(
             sample_selector = np.array(
                 [True if slide in tl else False for tl in true_labels])
             a_pred_y = pred_y[sample_selector, :]
-            a_true_y_sorted = true_y_sorted[sample_selector, :]
+            a_pred_labels = np.array(pred_labels)[sample_selector]
             ident_list.append(pairwise_identification(
-                a_pred_y, a_true_y_sorted))
+                a_pred_y, true_y, single_trial=True, 
+                pred_labels=a_pred_labels, true_labels=true_labels))
         ident = np.nanmean(np.vstack(ident_list), axis=0)
         print('Mean identification accuracy: {}'.format(np.nanmean(ident)))
 
@@ -163,8 +159,8 @@ def featdec_eval(
 # Entry point ################################################################
 
 if __name__ == '__main__':
-    # import sys
-    # sys.argv = ["", "config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
+    #import sys
+    #sys.argv = ["", "config/vggsound_fmriprep_rep4_500voxel_vggishish_allunits_fastl2lir_alpha100.yaml"]
 
     parser = argparse.ArgumentParser()
     parser.add_argument(

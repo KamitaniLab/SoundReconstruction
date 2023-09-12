@@ -24,7 +24,6 @@ recon subjects:
 # [REQUIRED]
 recon layers:
   conv5_3:
-    #model: 2022-10-28T10-52-39_transformer_5_3_final
     model: 2023-08-17T23-12-12_transformer_5_3_final
 
 # [REQUIRED]
@@ -52,4 +51,4 @@ eval feat output dir:
   ../data/recon_features/VGGishish/sound_attention/melception
 
 eval true feature dir:
-  ../data/features/VGGishishTest/derivatives/features/pytorch/melception/vggsound_4sec_crop/
+  ../data/features/VGGishishTest/melception/vggsound_4sec_crop/
