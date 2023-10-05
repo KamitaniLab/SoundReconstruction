@@ -6,7 +6,7 @@ This repository shows the data and demo code for [Jong-Yun Park et al., Sound re
 - Raw fMRI data: [link@figshare]()
 - Preprocessed fMRI data, DNN features extracted from sound clips: [link@figshare]()
 - Trained transformer models: [link@figshare]()
-- Stimulus sound clips: upon requeset via [Google from link]()
+- Stimulus sound clips: upon request via [Google from link]()
 
 ## Code
 ### Setup
