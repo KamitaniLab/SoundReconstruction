@@ -1,6 +1,6 @@
 # Sound Reconstruction
 
-This repository shows the data and demo code for [Jon-Yun Park et al., Sound reconstruction from human brain activity via a generative model with brain-like auditory features](https://arxiv.org/abs/2306.11629).
+This repository shows the data and demo code for [Jong-Yun Park et al., Sound reconstruction from human brain activity via a generative model with brain-like auditory features](https://arxiv.org/abs/2306.11629).
 
 ## Dataset
 - Raw fMRI data: [link@figshare]()
