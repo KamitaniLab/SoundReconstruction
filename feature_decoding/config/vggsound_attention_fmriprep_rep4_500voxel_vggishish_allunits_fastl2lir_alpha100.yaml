@@ -28,38 +28,21 @@ test fmri:
 # The ROIs used in feature decoding
 rois:
   AC : hcp180_r_lh.L_A1_ROI = 1 | hcp180_r_lh.L_MBelt_ROI = 1 | hcp180_r_lh.L_PBelt_ROI = 1 | hcp180_r_lh.L_RI_ROI = 1 | hcp180_r_lh.L_A4_ROI = 1 | hcp180_r_lh.L_A5_ROI = 1 | hcp180_r_lh.L_STSdp_ROI = 1 | hcp180_r_lh.L_STSda_ROI = 1 | hcp180_r_lh.L_STSvp_ROI = 1 | hcp180_r_lh.L_STSva_ROI = 1 | hcp180_r_lh.L_STGa_ROI = 1 | hcp180_r_lh.L_TA2_ROI = 1 | hcp180_r_rh.R_A1_ROI = 1 | hcp180_r_rh.R_MBelt_ROI = 1 | hcp180_r_rh.R_PBelt_ROI = 1 | hcp180_r_rh.R_RI_ROI = 1 | hcp180_r_rh.R_A4_ROI = 1 | hcp180_r_rh.R_A5_ROI = 1 | hcp180_r_rh.R_STSdp_ROI = 1 | hcp180_r_rh.R_STSda_ROI = 1 | hcp180_r_rh.R_STSvp_ROI = 1 | hcp180_r_rh.R_STSva_ROI = 1 | hcp180_r_rh.R_STGa_ROI = 1 | hcp180_r_rh.R_TA2_ROI | hcp180_r_lh.L_LBelt_ROI = 1 | hcp180_r_rh.R_LBelt_ROI = 1 
-#  A1 :  hcp180_r_lh.L_A1_ROI = 1  |  hcp180_r_rh.R_A1_ROI = 1 
-#  LBelt : hcp180_r_lh.L_LBelt_ROI = 1 | hcp180_r_rh.R_LBelt_ROI = 1
-#  MBelt : hcp180_r_lh.L_MBelt_ROI = 1  | hcp180_r_rh.R_MBelt_ROI = 1 
-#  PBelt : hcp180_r_lh.L_PBelt_ROI = 1  | hcp180_r_rh.R_PBelt_ROI = 1 
-#  RI : hcp180_r_lh.L_RI_ROI = 1  | hcp180_r_rh.R_RI_ROI = 1 
-#  A4 : hcp180_r_lh.L_A4_ROI = 1  | hcp180_r_rh.R_A4_ROI = 1 
-#  A5 : hcp180_r_lh.L_A5_ROI = 1  | hcp180_r_rh.R_A5_ROI = 1 
-#  STSdp : hcp180_r_lh.L_STSdp_ROI = 1  | hcp180_r_rh.R_STSdp_ROI = 1 
-#  STSda : hcp180_r_lh.L_STSda_ROI = 1  | hcp180_r_rh.R_STSda_ROI = 1 
-#  STSvp : hcp180_r_lh.L_STSvp_ROI = 1  | hcp180_r_rh.R_STSvp_ROI = 1
-#  STSva : hcp180_r_lh.L_STSva_ROI = 1  | hcp180_r_rh.R_STSva_ROI = 1
-#  STGa : hcp180_r_lh.L_STGa_ROI = 1 | hcp180_r_rh.R_STGa_ROI = 1
-#  TA2 : hcp180_r_lh.L_TA2_ROI = 1 | hcp180_r_rh.R_TA2_ROI = 1 
+  # A1 :  hcp180_r_lh.L_A1_ROI = 1  |  hcp180_r_rh.R_A1_ROI = 1 
+  # LBelt : hcp180_r_lh.L_LBelt_ROI = 1 | hcp180_r_rh.R_LBelt_ROI = 1
+  # PBelt : hcp180_r_lh.L_PBelt_ROI = 1  | hcp180_r_rh.R_PBelt_ROI = 1 
+  # A4 : hcp180_r_lh.L_A4_ROI = 1  | hcp180_r_rh.R_A4_ROI = 1 
+  # A5 : hcp180_r_lh.L_A5_ROI = 1  | hcp180_r_rh.R_A5_ROI = 1 
 
 # The number of voxels used in feature decoding
 rois voxel num:
   AC : 500
-  ACT : 500
-  ACJ : 500
-  A1 : 200
-  LBelt : 200
-  MBelt : 200
-  PBelt : 200
-  RI : 200
-  A4 : 200
-  A5 : 200 
-  STSdp : 200 
-  STSda : 200
-  STSvp : 200
-  STSva : 200
-  STGa : 200
-  TA2 : 200
+  # A1 : 200
+  # LBelt : 200
+  # PBelt : 200
+  # A4 : 200
+  # A5 : 200 
+  # MBelt : 200
 
 # In feature decoding, the key label is used for matching the DNN features. 
 attend label key:
@@ -78,23 +61,7 @@ network:
   vggishish/vggsound_4sec_crop
 
 layers:
-#   - conv1_1
-#   - conv1_2
-#   - conv2_1
-#   - conv2_2
-#   - conv3_1
-#   - conv3_2
-#   - conv3_3
-#   - conv4_1
-#   - conv4_2
-#   - conv4_3
-#   - conv5_1
-#   - conv5_2
   - conv5_3
-#   - fc1
-#   - fc2
-#   - fc3
-#   - mel
 
 # Feature decoding ###########################################################
 feature decoder dir:
