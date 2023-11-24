@@ -29,6 +29,11 @@ recon layers:
 # [REQUIRED]
 recon rois:
   - AC
+  # - A1
+  # - LBelt
+  # - PBelt
+  # - A4
+  # - A5
 
 # [REQUIRED]
 seed:
