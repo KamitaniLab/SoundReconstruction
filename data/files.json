@@ -1,0 +1,275 @@
+{
+    "fmri_train": {
+        "zip": false,
+        "save_in": "./fmri_data",
+        "files": [
+            {
+                "name": "S1_VGGishishTrain_volume_native.h5",
+                "md5sum": "f58c3fde5c38e4447fa91bf4577eb20a",
+                "splitted": true,
+                "split_files": [
+                    {
+                        "name": "S1_VGGishishTrain_volume_native.h5-00",
+                        "url": "https://ndownloader.figshare.com/files/43279095",
+                        "md5sum": "22401aff84bac08e000ac547ddb4c646"
+                    },
+                    {
+                        "name": "S1_VGGishishTrain_volume_native.h5-01",
+                        "url": "https://ndownloader.figshare.com/files/43279098",
+                        "md5sum": "56f04442f77c7d8b4479e704ebabbb5c"
+                    },
+                    {
+                        "name": "S1_VGGishishTrain_volume_native.h5-02",
+                        "url": "https://ndownloader.figshare.com/files/43279068",
+                        "md5sum": "f5a6d2c239915b6a0f8ff1882659614a"
+                    }
+                ]
+            },
+            {
+                "name": "S2_VGGishishTrain_volume_native.h5",
+                "md5sum": "ac3e196475827d5b1a5f55fd073ea728",
+                "splitted": true,
+                "split_files": [
+                    {
+                        "name": "S2_VGGishishTrain_volume_native.h5-00",
+                        "url": "https://ndownloader.figshare.com/files/43281636",
+                        "md5sum": "5ca1a363fb457e2c3383859ca4774228"
+                    },
+                    {
+                        "name": "S2_VGGishishTrain_volume_native.h5-01",
+                        "url": "https://ndownloader.figshare.com/files/43281639",
+                        "md5sum": "8c1efea7e6e7fd7a9b553c0720ba77f6"
+                    },
+                    {
+                        "name": "S2_VGGishishTrain_volume_native.h5-02",
+                        "url": "https://ndownloader.figshare.com/files/43284441",
+                        "md5sum": "dabb9bb797363a63d7614f8f26c69f80"
+                    }
+                ]
+            },
+            {
+                "name": "S3_VGGishishTrain_volume_native.h5",
+                "md5sum": "03380bc98371fd3b23d9eeeeaf6152b7",
+                "splitted": true,
+                "split_files": [
+                    {
+                        "name": "S3_VGGishishTrain_volume_native.h5-00",
+                        "url": "https://ndownloader.figshare.com/files/43284516",
+                        "md5sum": "a9bd7eb38a1a950023a3a52653f6192f"
+                    },
+                    {
+                        "name": "S3_VGGishishTrain_volume_native.h5-01",
+                        "url": "https://ndownloader.figshare.com/files/43284513",
+                        "md5sum": "737ce24c91f4c8a2f8da33e87db02493"
+                    },
+                    {
+                        "name": "S3_VGGishishTrain_volume_native.h5-02",
+                        "url": "https://ndownloader.figshare.com/files/43284492",
+                        "md5sum": "04e36b1d168e2a27ea573861cd4d0518"
+                    }
+                ]
+            },
+            {
+                "name": "S4_VGGishishTrain_volume_native.h5",
+                "md5sum": "29587902a1d855da106a84748d49bfb0",
+                "splitted": true,
+                "split_files": [
+                    {
+                        "name": "S4_VGGishishTrain_volume_native.h5-00",
+                        "url": "https://ndownloader.figshare.com/files/43284714",
+                        "md5sum": "fba3e094a006a4226ce857ccf684b74f"
+                    },
+                    {
+                        "name": "S4_VGGishishTrain_volume_native.h5-01",
+                        "url": "https://ndownloader.figshare.com/files/43284717",
+                        "md5sum": "99c1df5737d4d0558d58d19a5885b5c6"
+                    },
+                    {
+                        "name": "S4_VGGishishTrain_volume_native.h5-02",
+                        "url": "https://ndownloader.figshare.com/files/43284708",
+                        "md5sum": "191a33e6f707085d3fcdbdb655b17c79"
+                    }
+                ]
+            },
+            {
+                "name": "S5_VGGishishTrain_volume_native.h5",
+                "md5sum": "10fdcf26e26fc0ede7f941b155d186b1",
+                "splitted": true,
+                "split_files": [
+                    {
+                        "name": "S5_VGGishishTrain_volume_native.h5-00",
+                        "url": "https://ndownloader.figshare.com/files/43284900",
+                        "md5sum": "821b8d8f74939112b3f46ea63c7aac75"
+                    },
+                    {
+                        "name": "S5_VGGishishTrain_volume_native.h5-01",
+                        "url": "https://ndownloader.figshare.com/files/43284897",
+                        "md5sum": "492c86c25b5a904b0c99268d53f7ab3e"
+                    },
+                    {
+                        "name": "S5_VGGishishTrain_volume_native.h5-02",
+                        "url": "https://ndownloader.figshare.com/files/43284879",
+                        "md5sum": "0ba23146bc3791d3a1b69226b2d6cccb"
+                    }
+                ]
+            }
+        ]
+    },
+    "fmri_test": {
+        "zip": false,
+        "save_in": "./fmri_data",
+        "files": [
+            {
+                "name": "S1_VGGishishTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277718",
+                "md5sum": "b7cfa719a89a3cdc2ce8732ea9c3e20d"
+            },
+            {
+                "name": "S2_VGGishishTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277739",
+                "md5sum": "c84bdf3f3ed59f5595dbd24d42f51eca"
+            },
+            {
+                "name": "S3_VGGishishTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277727",
+                "md5sum": "1f9a2060ba39d96db70c95ea4af19c8f"
+            },
+            {
+                "name": "S4_VGGishishTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277730",
+                "md5sum": "0e05486170afe9d93bca772cce56e137"
+            },
+            {
+                "name": "S5_VGGishishTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277745",
+                "md5sum": "49cb54891db35fe40c0d2bb2cc86a499"
+            }
+        ]
+    },
+    "fmri_attention": {
+        "zip": false,
+        "save_in": "./fmri_data",
+        "files": [
+            {
+                "name": "S1_VGGishishAttentionTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277712",
+                "md5sum": "03652063072362704e1ca533be362cf4"
+            },
+            {
+                "name": "S2_VGGishishAttentionTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277736",
+                "md5sum": "bbff34b9208ed46ef27e5d2b760e6ed6"
+            },
+            {
+                "name": "S3_VGGishishAttentionTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277721",
+                "md5sum": "db1535a9726e65fabdd94532a8495357"
+            },
+            {
+                "name": "S4_VGGishishAttentionTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277724",
+                "md5sum": "6dbca089f60b4f6f1780e96fb6b926af"
+            },
+            {
+                "name": "S5_VGGishishAttentionTest_volume_native.h5",
+                "url": "https://ndownloader.figshare.com/files/43277742",
+                "md5sum": "05b69cd73266ef00e5e40b9025a5c9dc"
+            }
+        ]
+    },
+    "features_train": {
+        "zip": true,
+        "save_in": "./features",
+        "files": [
+            {
+                "name": "VGGishishTrain-vggishish.zip",
+                "md5sum": "f71f1bdd4780e3b08731f3d873948a82",
+                "splitted": true,
+                "split_files": [
+                    {
+                        "name": "VGGishishTrain-vggishish.zip-00",
+                        "url": "https://ndownloader.figshare.com/files/43315365",
+                        "md5sum": "435cac8b7d4ce6ce04ea61592e3fa01a"
+                    },
+                    {
+                        "name": "VGGishishTrain-vggishish.zip-01",
+                        "url": "https://ndownloader.figshare.com/files/43315374",
+                        "md5sum": "da31d30e630b6a5825f569de6050b486"
+                    },
+                    {
+                        "name": "VGGishishTrain-vggishish.zip-02",
+                        "url": "https://ndownloader.figshare.com/files/43315368",
+                        "md5sum": "765c9f865d35c6a6dfe2bfaee797eba5"
+                    },
+                    {
+                        "name": "VGGishishTrain-vggishish.zip-03",
+                        "url": "https://ndownloader.figshare.com/files/43315371",
+                        "md5sum": "07a377b5c6d3e4a5e0d604e2d298931b"
+                    },
+                    {
+                        "name": "VGGishishTrain-vggishish.zip-04",
+                        "url": "https://ndownloader.figshare.com/files/43315377",
+                        "md5sum": "310ca60635e067cb6e38cde685547f3a"
+                    },
+                    {
+                        "name": "VGGishishTrain-vggishish.zip-05",
+                        "url": "https://ndownloader.figshare.com/files/43315353",
+                        "md5sum": "67a0f8fa5234e6544129d4aaa7046ae6"
+                    }
+                ]
+            }
+        ]
+    },
+    "features_test": {
+        "zip": true,
+        "save_in": "./features",
+        "files": [
+            {
+                "name": "VGGishishTest-melception.zip",
+                "url": "https://ndownloader.figshare.com/files/43312950",
+                "md5sum": "92c7703a77f6bcf42c9df687ffecdfbd"
+            },
+            {
+                "name": "VGGishishTest-vggishish.zip",
+                "url": "https://ndownloader.figshare.com/files/43312947",
+                "md5sum": "e3d73316c3ae2dd515df38aa44a03a07"
+            }
+        ]
+    },
+    "model": {
+        "zip": true,
+        "save_in": "./model",
+        "files": [
+            {
+                "name": "specvqgan-2023-09-01T10-35-12_transformer_fc3_final.zip",
+                "url": "https://ndownloader.figshare.com/files/43301592",
+                "md5sum": "bff74a513dc8d031ffb2e4d08bd99a1d"
+            },
+            {
+                "name": "specvqgan-2022-10-28T10-52-39_transformer_5_3_final.zip",
+                "url": "https://ndownloader.figshare.com/files/43301598",
+                "md5sum": "b2b944f28d795f9cba99bc66f0c42703"
+            },
+            {
+                "name": "specvqgan-2023-11-16T15-41-28_transformer_4_1_final.zip",
+                "url": "https://ndownloader.figshare.com/files/43301580",
+                "md5sum": "2bb035444543f9bebddbeaf64bac19f0"
+            },
+            {
+                "name": "specvqgan-2023-11-16T15-41-57_transformer_3_1_final.zip",
+                "url": "https://ndownloader.figshare.com/files/43301583",
+                "md5sum": "380dfe2e52c3df6c57dd729f0ca7777a"
+            },
+            {
+                "name": "specvqgan-2023-11-16T15-42-33_transformer_2_1_final.zip",
+                "url": "https://ndownloader.figshare.com/files/43301577",
+                "md5sum": "0fcfab72609936cf753e301df8615bb0"
+            },
+            {
+                "name": "specvqgan-2023-11-16T15-43-27_transformer_1_1_final.zip",
+                "url": "https://ndownloader.figshare.com/files/43301586",
+                "md5sum": "fd147ecfeea56ff5fcd605ccba5ca72b"
+            }
+        ]
+    }
+}
