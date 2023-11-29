@@ -3,13 +3,16 @@
 This repository shows the data and demo code for [Jong-Yun Park et al., Sound reconstruction from human brain activity via a generative model with brain-like auditory features](https://arxiv.org/abs/2306.11629).
 
 ## Dataset
-- Raw fMRI data: [link@figshare]()
-- Preprocessed fMRI data, DNN features extracted from sound clips: [link@figshare]()
-- Trained transformer models: [link@figshare]()
-- Stimulus sound clips: upon request via [Google from link]()
+
+- Raw fMRI data: TBA
+- Preprocessed fMRI data, DNN features extracted from sound clips: [figshare](https://figshare.com/articles/dataset/23633751)
+- Trained transformer models: [figshare](https://figshare.com/articles/dataset/23633751)
+- Stimulus sound clips: upon request via <TBA>
 
 ## Code
+
 ### Setup
+
 1. Clone this `SoundReconstruction` repository to your local machine (GPU machine preferred).
 ```
 git clone git@github.com:KamitaniLab/SoundReconstruction.git
@@ -28,12 +31,11 @@ git clone git@github.com:KamitaniLab/SpecVQGAN.git
 ```
 
 ### Download datasets and models
-Download fmri_data and DNN feature files from figshare; 
-see [data/README.md](data/README.md)
-Download models from figshare;
-see [data/README.md](data/README.md)
+
+See [data/README.md](data/README.md).
 
 ### Usage
+
 We provide scripts that reproduce main results in the original paper.
 Please execute the sh files in the following order.
 
