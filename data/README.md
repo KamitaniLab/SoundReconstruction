@@ -2,6 +2,14 @@
 
 ## Downloading dataset
 
+First, please install [bdpy](https://github.com/KamitaniLab/bdpy) via pip (version >= 0.21).
+
+```
+$ pip install bdpy
+```
+
+Then you can download data with the following command.
+
 ```
 $ python download.py <target>
 ```
