@@ -35,8 +35,6 @@ def main(cfg):
                         dest = './'
                     shutil.unpack_archive(output, extract_dir=dest)
 
-        break
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
