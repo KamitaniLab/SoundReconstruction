@@ -7,7 +7,7 @@ This repository shows the data and demo code for [Jong-Yun Park et al., Sound re
 - Raw fMRI data: TBA
 - Preprocessed fMRI data, DNN features extracted from sound clips: [figshare](https://figshare.com/articles/dataset/23633751)
 - Trained transformer models: [figshare](https://figshare.com/articles/dataset/23633751)
-- Stimulus sound clips: upon request via \<TBA\>.
+- Stimulus sound clips: Refer to [data/README.md](data/README.md) .
 
 ## Code
 

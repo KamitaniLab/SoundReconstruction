@@ -58,3 +58,7 @@ data
         ├── 2023-11-16T15-42-33_transformer_2_1_final
         └── 2023-11-16T15-43-27_transformer_1_1_final
 ```
+
+## Stimulus sound clip
+
+The sound clips used in the experiment were selected from the [VGG sound dataset](https://www.robots.ox.ac.uk/~vgg/data/vggsound/). The Youtube video ID, retrieval time, and label information are listed in [SoundReconstruction_stimulus.csv](SoundReconstruction_stimulus.csv).
