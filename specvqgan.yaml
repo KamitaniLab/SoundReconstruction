@@ -236,7 +236,7 @@ dependencies:
     - astroid==2.6.6
     - atomicwrites==1.4.0
     - babel==2.9.1
-    - bdpy==0.21
+    - bdpy==0.21.1
     - binaryornot==0.4.4
     - black==21.9b0
     - cloudpickle==2.0.0
