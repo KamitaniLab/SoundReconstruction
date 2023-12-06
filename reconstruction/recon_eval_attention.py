@@ -117,7 +117,7 @@ def recon_eval(
                 elif eval_feat == 'sc':
                     recon_y = np.nanmedian(recon_y, axis=1).reshape(recon_y.shape[0], -1)
                     attend_true_features = np.nanmedian(attend_true_features, axis=1).reshape(recon_y.shape[0], -1)
-                    unattend_true_features = np.nanmean(unattend_true_features, axis=1).reshape(recon_y.shape[0], -1)
+                    unattend_true_features = np.nanmedian(unattend_true_features, axis=1).reshape(recon_y.shape[0], -1)
                 elif eval_feat == 'f0':
                     recon_y = np.nanmean(recon_y, axis=1).reshape(recon_y.shape[0], -1)
                     attend_true_features = np.nanmean(attend_true_features, axis=1).reshape(recon_y.shape[0], -1)
