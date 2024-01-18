@@ -251,9 +251,9 @@
                 "postproc": [{"name": "unzip", "destination": "./model"}]
             },
             {
-                "name": "specvqgan-2022-10-28T10-52-39_transformer_5_3_final.zip",
-                "url": "https://ndownloader.figshare.com/files/43301598",
-                "md5sum": "b2b944f28d795f9cba99bc66f0c42703",
+                "name": "specvqgan-2023-08-17T23-12-12_transformer_5_3_final.zip",
+                "url": "https://figshare.com/ndownloader/files/44101367",
+                "md5sum": "087da93be84ee7aa03c55c2077a7c6b8",
                 "postproc": [{"name": "unzip", "destination": "./model"}]
             },
             {
