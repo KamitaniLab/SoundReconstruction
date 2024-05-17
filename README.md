@@ -39,7 +39,7 @@ See [data/README.md](data/README.md).
 We provide scripts that reproduce main results in the original paper.
 Please execute the sh files in the following order.
 
-1. Train feature decoders to predict the VGGishsih features. 
+1. Train feature decoders to predict the VGGishish features. 
 ```
 ./1_train_batch.sh
 ```
