@@ -50,6 +50,8 @@ data
 │   ├── S5_VGGishishTest_volume_native.h5
 │   └── S5_VGGishishTrain_volume_native.h5
 └── models
+    └── melception
+    │   └── melception-21-05-10T09-28-40.pt
     └── specvqgan
         ├── 2022-10-28T10-52-39_transformer_5_3_final
         ├── 2023-09-01T10-35-12_transformer_fc3_final
