@@ -279,7 +279,13 @@
                 "url": "https://ndownloader.figshare.com/files/43301586",
                 "md5sum": "fd147ecfeea56ff5fcd605ccba5ca72b",
                 "postproc": [{"name": "unzip", "destination": "./models"}]
-            }
+            },
+	    {
+		"name": "melception.zip",
+		"url": "https://figshare.com/ndownloader/files/46387450",
+	        "md5sum": "e5c0bbf27144cfb0c6a96f268215aed7",
+                "postproc": [{"name": "unzip", "destination": "./models"}]
+	    }
         ]
     }
 }
