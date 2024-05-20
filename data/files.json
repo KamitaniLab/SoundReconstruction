@@ -240,45 +240,45 @@
             }
         ]
     },
-    "model": {
+    "models": {
         "zip": true,
-        "save_in": "./model",
+        "save_in": "./models",
         "files": [
             {
                 "name": "specvqgan-2023-09-01T10-35-12_transformer_fc3_final.zip",
                 "url": "https://ndownloader.figshare.com/files/43301592",
                 "md5sum": "bff74a513dc8d031ffb2e4d08bd99a1d",
-                "postproc": [{"name": "unzip", "destination": "./model"}]
+                "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2023-08-17T23-12-12_transformer_5_3_final.zip",
                 "url": "https://figshare.com/ndownloader/files/44101367",
                 "md5sum": "087da93be84ee7aa03c55c2077a7c6b8",
-                "postproc": [{"name": "unzip", "destination": "./model"}]
+                "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2023-11-16T15-41-28_transformer_4_1_final.zip",
                 "url": "https://ndownloader.figshare.com/files/43301580",
                 "md5sum": "2bb035444543f9bebddbeaf64bac19f0",
-                "postproc": [{"name": "unzip", "destination": "./model"}]
+                "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2023-11-16T15-41-57_transformer_3_1_final.zip",
                 "url": "https://ndownloader.figshare.com/files/43301583",
                 "md5sum": "380dfe2e52c3df6c57dd729f0ca7777a",
-                "postproc": [{"name": "unzip", "destination": "./model"}]
+                "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2023-11-16T15-42-33_transformer_2_1_final.zip",
                 "url": "https://ndownloader.figshare.com/files/43301577",
                 "md5sum": "0fcfab72609936cf753e301df8615bb0",
-                "postproc": [{"name": "unzip", "destination": "./model"}]
+                "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2023-11-16T15-43-27_transformer_1_1_final.zip",
                 "url": "https://ndownloader.figshare.com/files/43301586",
                 "md5sum": "fd147ecfeea56ff5fcd605ccba5ca72b",
-                "postproc": [{"name": "unzip", "destination": "./model"}]
+                "postproc": [{"name": "unzip", "destination": "./models"}]
             }
         ]
     }
