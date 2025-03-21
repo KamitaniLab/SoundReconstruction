@@ -26,15 +26,28 @@ def ResampleTemporal(item):
     feat_len = item.shape[3]
     if feat_len < 2:
         raise ValueError("val error")
-    # evenly spaced points (abcdefghkl -> aoooofoooo)
-    idx = np.linspace(0, feat_len, 21, dtype=np.int, endpoint=False)
-    # xoooo xoooo -> ooxoo ooxoo
-    shift = feat_len // (21 + 1)
-    idx = idx + shift
-
-    item = item[:, :, :, idx]
-    return item
-
+    
+    # 均等に分割されたポイント（abcdefghkl -> aoooofoooo）
+    resampled = np.zeros(item.shape[:-1] + (21,))
+    
+    # リサンプリング後のターゲットの時間次元を定義
+    target_time_len = 21
+    
+    # 平均化のためのウィンドウサイズを計算
+    window_size = feat_len // target_time_len
+    
+    # リサンプリングされた配列を初期化
+    resampled = np.zeros(item.shape[:-1] + (target_time_len,))
+        
+    for i in range(21):    
+        # 現在のウィンドウの開始・終了インデックスを計算
+        start_idx = i * window_size
+        end_idx = start_idx + window_size
+        
+        # ウィンドウ内の平均を計算し、リサンプリング配列に代入
+        resampled[..., i] = np.mean(item[..., start_idx:end_idx], axis=-1)
+    
+    return resampled
 
 def recon_sound(
     lib_path,
