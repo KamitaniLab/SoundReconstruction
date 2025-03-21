@@ -55,10 +55,10 @@ data
     └── specvqgan
         ├── 2022-10-28T10-52-39_transformer_5_3_final
         ├── 2023-09-01T10-35-12_transformer_fc3_final
-        ├── 2023-11-16T15-41-28_transformer_4_1_final
-        ├── 2023-11-16T15-41-57_transformer_3_1_final
-        ├── 2023-11-16T15-42-33_transformer_2_1_final
-        └── 2023-11-16T15-43-27_transformer_1_1_final
+        ├── 2024-09-19T17-11-48_transformer_4_1_final
+        ├── 2024-09-19T17-12-20_transformer_3_1_final
+        ├── 2024-09-19T17-13-10_transformer_2_1_final
+        └── 2024-09-19T17-12-51_transformer_1_1_final
 ```
 
 ## Stimulus sound clip
