@@ -1,10 +1,12 @@
 # Sound Reconstruction
 
-This repository shows the data and demo code for [Jong-Yun Park et al., Sound reconstruction from human brain activity via a generative model with brain-like auditory features](https://arxiv.org/abs/2306.11629).
+This repository shows the data and demo code:
+- Park JY, Tsukamoto M, Tanaka M, Kamitani Y (2025) Natural sounds can be reconstructed from human neuroimaging data using deep neural network representation. PLOS Biology 23(7): e3003293. [https://doi.org/10.1371/journal.pbio.3003293](https://doi.org/10.1371/journal.pbio.3003293)
+- Park, JY, Tsukamoto M, Tanaka M, & Kamitani Y (2023) Sound reconstruction from human brain activity via a generative model with brain-like auditory features (arXiv:2306.11629). arXiv. [http://arxiv.org/abs/2306.11629](http://arxiv.org/abs/2306.11629)
 
 ## Dataset
 
-- Raw fMRI data: TBA
+- Raw fMRI data: [OpenNeuro](https://openneuro.org/datasets/ds006319)
 - Preprocessed fMRI data, DNN features extracted from sound clips: [figshare](https://figshare.com/articles/dataset/23633751)
 - Trained transformer models: [figshare](https://figshare.com/articles/dataset/23633751)
 - Stimulus sound clips: Refer to [data/README.md](data/README.md) .
