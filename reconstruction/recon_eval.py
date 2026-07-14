@@ -153,7 +153,6 @@ def recon_eval(
                 # Evaluation
                 r_prof = profile_correlation(recon_y, true_y)
                 r_patt = pattern_correlation(recon_y, true_y)
-                ident = pairwise_identification(recon_y, true_y)
                 # Identification
                 ident_list = []
                 for slide in sample_types:
