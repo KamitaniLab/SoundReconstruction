@@ -10,17 +10,17 @@
                 "split_files": [
                     {
                         "name": "S1_VGGishishTrain_volume_native.h5-00",
-                        "url": "https://ndownloader.figshare.com/files/43279095",
+                        "url": "https://api.figshare.com/v2/file/download/43279095",
                         "md5sum": "22401aff84bac08e000ac547ddb4c646"
                     },
                     {
                         "name": "S1_VGGishishTrain_volume_native.h5-01",
-                        "url": "https://ndownloader.figshare.com/files/43279098",
+                        "url": "https://api.figshare.com/v2/file/download/43279098",
                         "md5sum": "56f04442f77c7d8b4479e704ebabbb5c"
                     },
                     {
                         "name": "S1_VGGishishTrain_volume_native.h5-02",
-                        "url": "https://ndownloader.figshare.com/files/43279068",
+                        "url": "https://api.figshare.com/v2/file/download/43279068",
                         "md5sum": "f5a6d2c239915b6a0f8ff1882659614a"
                     }
                 ]
@@ -32,17 +32,17 @@
                 "split_files": [
                     {
                         "name": "S2_VGGishishTrain_volume_native.h5-00",
-                        "url": "https://ndownloader.figshare.com/files/43281636",
+                        "url": "https://api.figshare.com/v2/file/download/43281636",
                         "md5sum": "5ca1a363fb457e2c3383859ca4774228"
                     },
                     {
                         "name": "S2_VGGishishTrain_volume_native.h5-01",
-                        "url": "https://ndownloader.figshare.com/files/43281639",
+                        "url": "https://api.figshare.com/v2/file/download/43281639",
                         "md5sum": "8c1efea7e6e7fd7a9b553c0720ba77f6"
                     },
                     {
                         "name": "S2_VGGishishTrain_volume_native.h5-02",
-                        "url": "https://ndownloader.figshare.com/files/43284441",
+                        "url": "https://api.figshare.com/v2/file/download/43284441",
                         "md5sum": "dabb9bb797363a63d7614f8f26c69f80"
                     }
                 ]
@@ -54,17 +54,17 @@
                 "split_files": [
                     {
                         "name": "S3_VGGishishTrain_volume_native.h5-00",
-                        "url": "https://ndownloader.figshare.com/files/43284516",
+                        "url": "https://api.figshare.com/v2/file/download/43284516",
                         "md5sum": "a9bd7eb38a1a950023a3a52653f6192f"
                     },
                     {
                         "name": "S3_VGGishishTrain_volume_native.h5-01",
-                        "url": "https://ndownloader.figshare.com/files/43284513",
+                        "url": "https://api.figshare.com/v2/file/download/43284513",
                         "md5sum": "737ce24c91f4c8a2f8da33e87db02493"
                     },
                     {
                         "name": "S3_VGGishishTrain_volume_native.h5-02",
-                        "url": "https://ndownloader.figshare.com/files/43284492",
+                        "url": "https://api.figshare.com/v2/file/download/43284492",
                         "md5sum": "04e36b1d168e2a27ea573861cd4d0518"
                     }
                 ]
@@ -76,17 +76,17 @@
                 "split_files": [
                     {
                         "name": "S4_VGGishishTrain_volume_native.h5-00",
-                        "url": "https://ndownloader.figshare.com/files/43284714",
+                        "url": "https://api.figshare.com/v2/file/download/43284714",
                         "md5sum": "fba3e094a006a4226ce857ccf684b74f"
                     },
                     {
                         "name": "S4_VGGishishTrain_volume_native.h5-01",
-                        "url": "https://ndownloader.figshare.com/files/43284717",
+                        "url": "https://api.figshare.com/v2/file/download/43284717",
                         "md5sum": "99c1df5737d4d0558d58d19a5885b5c6"
                     },
                     {
                         "name": "S4_VGGishishTrain_volume_native.h5-02",
-                        "url": "https://ndownloader.figshare.com/files/43284708",
+                        "url": "https://api.figshare.com/v2/file/download/43284708",
                         "md5sum": "191a33e6f707085d3fcdbdb655b17c79"
                     }
                 ]
@@ -98,17 +98,17 @@
                 "split_files": [
                     {
                         "name": "S5_VGGishishTrain_volume_native.h5-00",
-                        "url": "https://ndownloader.figshare.com/files/43284900",
+                        "url": "https://api.figshare.com/v2/file/download/43284900",
                         "md5sum": "821b8d8f74939112b3f46ea63c7aac75"
                     },
                     {
                         "name": "S5_VGGishishTrain_volume_native.h5-01",
-                        "url": "https://ndownloader.figshare.com/files/43284897",
+                        "url": "https://api.figshare.com/v2/file/download/43284897",
                         "md5sum": "492c86c25b5a904b0c99268d53f7ab3e"
                     },
                     {
                         "name": "S5_VGGishishTrain_volume_native.h5-02",
-                        "url": "https://ndownloader.figshare.com/files/43284879",
+                        "url": "https://api.figshare.com/v2/file/download/43284879",
                         "md5sum": "0ba23146bc3791d3a1b69226b2d6cccb"
                     }
                 ]
@@ -121,27 +121,27 @@
         "files": [
             {
                 "name": "S1_VGGishishTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277718",
+                "url": "https://api.figshare.com/v2/file/download/43277718",
                 "md5sum": "b7cfa719a89a3cdc2ce8732ea9c3e20d"
             },
             {
                 "name": "S2_VGGishishTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277739",
+                "url": "https://api.figshare.com/v2/file/download/43277739",
                 "md5sum": "c84bdf3f3ed59f5595dbd24d42f51eca"
             },
             {
                 "name": "S3_VGGishishTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277727",
+                "url": "https://api.figshare.com/v2/file/download/43277727",
                 "md5sum": "1f9a2060ba39d96db70c95ea4af19c8f"
             },
             {
                 "name": "S4_VGGishishTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277730",
+                "url": "https://api.figshare.com/v2/file/download/43277730",
                 "md5sum": "0e05486170afe9d93bca772cce56e137"
             },
             {
                 "name": "S5_VGGishishTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277745",
+                "url": "https://api.figshare.com/v2/file/download/43277745",
                 "md5sum": "49cb54891db35fe40c0d2bb2cc86a499"
             }
         ]
@@ -152,27 +152,27 @@
         "files": [
             {
                 "name": "S1_VGGishishAttentionTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277712",
+                "url": "https://api.figshare.com/v2/file/download/43277712",
                 "md5sum": "03652063072362704e1ca533be362cf4"
             },
             {
                 "name": "S2_VGGishishAttentionTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277736",
+                "url": "https://api.figshare.com/v2/file/download/43277736",
                 "md5sum": "bbff34b9208ed46ef27e5d2b760e6ed6"
             },
             {
                 "name": "S3_VGGishishAttentionTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277721",
+                "url": "https://api.figshare.com/v2/file/download/43277721",
                 "md5sum": "db1535a9726e65fabdd94532a8495357"
             },
             {
                 "name": "S4_VGGishishAttentionTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277724",
+                "url": "https://api.figshare.com/v2/file/download/43277724",
                 "md5sum": "6dbca089f60b4f6f1780e96fb6b926af"
             },
             {
                 "name": "S5_VGGishishAttentionTest_volume_native.h5",
-                "url": "https://ndownloader.figshare.com/files/43277742",
+                "url": "https://api.figshare.com/v2/file/download/43277742",
                 "md5sum": "05b69cd73266ef00e5e40b9025a5c9dc"
             }
         ]
@@ -189,32 +189,32 @@
                 "split_files": [
                     {
                         "name": "VGGishishTrain-vggishish.zip-00",
-                        "url": "https://ndownloader.figshare.com/files/43315365",
+                        "url": "https://api.figshare.com/v2/file/download/43315365",
                         "md5sum": "435cac8b7d4ce6ce04ea61592e3fa01a"
                     },
                     {
                         "name": "VGGishishTrain-vggishish.zip-01",
-                        "url": "https://ndownloader.figshare.com/files/43315374",
+                        "url": "https://api.figshare.com/v2/file/download/43315374",
                         "md5sum": "da31d30e630b6a5825f569de6050b486"
                     },
                     {
                         "name": "VGGishishTrain-vggishish.zip-02",
-                        "url": "https://ndownloader.figshare.com/files/43315368",
+                        "url": "https://api.figshare.com/v2/file/download/43315368",
                         "md5sum": "765c9f865d35c6a6dfe2bfaee797eba5"
                     },
                     {
                         "name": "VGGishishTrain-vggishish.zip-03",
-                        "url": "https://ndownloader.figshare.com/files/43315371",
+                        "url": "https://api.figshare.com/v2/file/download/43315371",
                         "md5sum": "07a377b5c6d3e4a5e0d604e2d298931b"
                     },
                     {
                         "name": "VGGishishTrain-vggishish.zip-04",
-                        "url": "https://ndownloader.figshare.com/files/43315377",
+                        "url": "https://api.figshare.com/v2/file/download/43315377",
                         "md5sum": "310ca60635e067cb6e38cde685547f3a"
                     },
                     {
                         "name": "VGGishishTrain-vggishish.zip-05",
-                        "url": "https://ndownloader.figshare.com/files/43315353",
+                        "url": "https://api.figshare.com/v2/file/download/43315353",
                         "md5sum": "67a0f8fa5234e6544129d4aaa7046ae6"
                     }
                 ]
@@ -227,14 +227,14 @@
         "files": [
             {
                 "name": "VGGishishTest-melception.zip",
-                "url": "https://ndownloader.figshare.com/files/43312950",
+                "url": "https://api.figshare.com/v2/file/download/43312950",
                 "md5sum": "92c7703a77f6bcf42c9df687ffecdfbd",
                 "postproc": [{"name": "unzip", "destination": "./features"}]
 
             },
             {
                 "name": "VGGishishTest-vggishish.zip",
-                "url": "https://ndownloader.figshare.com/files/43312947",
+                "url": "https://api.figshare.com/v2/file/download/43312947",
                 "md5sum": "e3d73316c3ae2dd515df38aa44a03a07",
                 "postproc": [{"name": "unzip", "destination": "./features"}]
             }
@@ -246,46 +246,46 @@
         "files": [
             {
                 "name": "specvqgan-2023-09-01T10-35-12_transformer_fc3_final.zip",
-                "url": "https://figshare.com/ndownloader/files/53107496",
+                "url": "https://api.figshare.com/v2/file/download/53107496",
                 "md5sum": "619d98dbc76b4d24ef98ce981c027e91",
                 "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2023-08-17T23-12-12_transformer_5_3_final.zip",
-                "url": "https://figshare.com/ndownloader/files/53107481",
+                "url": "https://api.figshare.com/v2/file/download/53107481",
                 "md5sum": "075b4eb2de633d519872714fd881fcf6",
                 "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2024-09-19T17-11-48_transformer_4_1_final.zip",
-                "url": "https://figshare.com/ndownloader/files/53107340",
+                "url": "https://api.figshare.com/v2/file/download/53107340",
                 "md5sum": "5e28662ce6ed1b7acb15dbddbc36b136",
                 "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2024-09-19T17-12-20_transformer_3_1_final.zip",
-                "url": "https://figshare.com/ndownloader/files/53107367",
+                "url": "https://api.figshare.com/v2/file/download/53107367",
                 "md5sum": "6c04bf2e92d7196bb9c88b40f6948313",
                 "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2024-09-19T17-13-10_transformer_2_1_final.zip",
-                "url": "https://figshare.com/ndownloader/files/53107421",
+                "url": "https://api.figshare.com/v2/file/download/53107421",
                 "md5sum": "7df6858b0d652581c5a4f1b10ae287a7",
                 "postproc": [{"name": "unzip", "destination": "./models"}]
             },
             {
                 "name": "specvqgan-2024-09-19T17-12-51_transformer_1_1_final.zip",
-                "url": "https://figshare.com/ndownloader/files/53107382",
+                "url": "https://api.figshare.com/v2/file/download/53107382",
                 "md5sum": "742fd1a1e11e4ee6361ed1f25b69c568",
                 "postproc": [{"name": "unzip", "destination": "./models"}]
             },
-	    {
-		"name": "melception.zip",
-		"url": "https://figshare.com/ndownloader/files/46387450",
-	        "md5sum": "e5c0bbf27144cfb0c6a96f268215aed7",
-                "postproc": [{"name": "unzip", "destination": "./models"}]
-	    }
+            {
+            "name": "melception.zip",
+            "url": "https://api.figshare.com/v2/file/download/46387450",
+                "md5sum": "e5c0bbf27144cfb0c6a96f268215aed7",
+                    "postproc": [{"name": "unzip", "destination": "./models"}]
+            }
         ]
     }
 }

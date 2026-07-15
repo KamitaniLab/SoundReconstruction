@@ -14,15 +14,30 @@ def main(cfg):
 
     for fl in target['files']:
         output = os.path.join(target['save_in'], fl['name'])
+        done_marker = output + '.done' if 'postproc' in fl else None
+
+        # Already downloaded and post-processed: skip entirely
+        if done_marker and os.path.exists(done_marker):
+            continue
 
         # Downloading
         if not os.path.exists(output):
-            if 'splitted' in fl and fl['splitted']:
-                print(f'Downloading {output}')
-                download_splitted_file(fl['split_files'], output, progress_bar=True, md5sum=fl['md5sum'])
-            else:
-                print(f'Downloading {output} from {fl["url"]}')
-                download_file(fl['url'], output, progress_bar=True, md5sum=fl['md5sum'])
+            try:
+                if 'splitted' in fl and fl['splitted']:
+                    print(f'Downloading {output}')
+                    download_splitted_file(fl['split_files'], output, progress_bar=True, md5sum=fl['md5sum'])
+                else:
+                    print(f'Downloading {output} from {fl["url"]}')
+                    download_file(fl['url'], output, progress_bar=True, md5sum=fl['md5sum'])
+            except Exception:
+                if os.path.exists(output):
+                    os.remove(output)
+                if 'splitted' in fl and fl['splitted']:
+                    for sf in fl['split_files']:
+                        sf_output = os.path.join(target['save_in'], sf['name'])
+                        if os.path.exists(sf_output):
+                            os.remove(sf_output)
+                raise
 
         # Postprocessing
         if 'postproc' in fl:
@@ -34,6 +49,8 @@ def main(cfg):
                     else:
                         dest = './'
                     shutil.unpack_archive(output, extract_dir=dest)
+            with open(done_marker, 'w'):
+                pass
 
 
 if __name__ == '__main__':
